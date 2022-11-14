@@ -1,336 +1,17 @@
-Last login: Mon Nov 14 23:23:18 on ttys000
-SSH Login start
-(base)  BeShyun 🌈   ~   master  SSH Login start
-ssh: Could not resolve hostname login: nodename nor servname provided, or not known
-(base)  ✘ BeShyun 🌈   ~   master  cd /Users/2022_Programming/2022_2nd half/appPractice
-cd: string not in pwd: /Users/2022_Programming/2022_2nd
-(base)  ✘ BeShyun 🌈   ~   master  cd /Users/2022_Programming/2022_2nd.half/appPractice
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  ssh -T
- git@github.com:cestbonciel/iOS-TIL.git
-ssh: Could not resolve hostname github.com:cestbonciel/iOS-TIL.git: nodename nor servname provided, or not known
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  SSH
-Login start
-ssh: Could not resolve hostname login: nodename nor servname provided, or not known
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  ssh
-git@github.com:cestbonciel
-ssh: Could not resolve hostname github.com:cestbonciel: nodename nor servname provided, or not known
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  ssh
-git@github.com
-Enter passphrase for key '/Users/a0000/.ssh/id_rsa':
-PTY allocation request failed on channel 0
-Hi cestbonciel! You've successfully authenticated, but GitHub does not provide shell access.
-Connection to github.com closed.
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  git
-status
-fatal: not a git repository (or any of the parent directories): .git
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  ssh
-git@github.com:cestbonciel/iOS-TIL.git
-ssh: Could not resolve hostname github.com:cestbonciel/iOS-TIL.git: nodename nor servname provided, or not known
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  git
-clone git@github.com:cestbonciel/iOS-TIL.git
-Cloning into 'iOS-TIL'...
-Enter passphrase for key '/Users/a0000/.ssh/id_rsa':
-Enter passphrase for key '/Users/a0000/.ssh/id_rsa':
-remote: Enumerating objects: 5, done.
-remote: Counting objects: 100% (5/5), done.
-remote: Compressing objects: 100% (4/4), done.
-remote: Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
-Receiving objects: 100% (5/5), done.
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  ls
-DoItSwift_basic fc_30projects   iOS-TIL
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  ls
-DoItSwift_basic fc_30projects
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  git st
-atus
-fatal: not a git repository (or any of the parent directories): .git
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  git
-init
-hint: Using 'master' as the name for the initial branch. This default branch name
-hint: is subject to change. To configure the initial branch name to use in all
-hint: of your new repositories, which will suppress this warning, call:
-hint:
-hint: 	git config --global init.defaultBranch <name>
-hint:
-hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
-hint: 'development'. The just-created branch can be renamed via this command:
-hint:
-hint: 	git branch -m <name>
-Initialized empty Git repository in /Users/2022_Programming/2022_2nd.half/appPractice/.git/
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   master  git status
-On branch master
+# Created by https://www.toptal.com/developers/gitignore/api/swift,firebase,xcode
+# Edit at https://www.toptal.com/developers/gitignore?templates=swift,firebase,xcode
 
-No commits yet
+### Firebase ###
+.idea
+**/node_modules/*
+**/.firebaserc
 
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	DoItSwift_basic/
-	fc_30projects/
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
 
-nothing added to commit but untracked files present (use "git add" to track)
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   master  git add .
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   master ✚  git commit -m "my iOS study TIL"
-[master (root-commit) ba4ce6e] my iOS study TIL
- 43 files changed, 2584 insertions(+)
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio.xcodeproj/project.pbxproj
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio.xcodeproj/project.xcworkspace/contents.xcworkspacedata
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio.xcodeproj/project.xcworkspace/xcuserdata/a0000.xcuserdatad/UserInterfaceState.xcuserstate
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/AppDelegate.swift
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/Assets.xcassets/AccentColor.colorset/Contents.json
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/Assets.xcassets/AppIcon.appiconset/Contents.json
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/Assets.xcassets/Contents.json
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/Base.lproj/LaunchScreen.storyboard
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/Base.lproj/Main.storyboard
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/Info.plist
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/SceneDelegate.swift
- create mode 100755 DoItSwift_basic/Audio/Audio/Audio/Sicilian_Breeze.mp3
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/ViewController.swift
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator.xcodeproj/project.pbxproj
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator.xcodeproj/project.xcworkspace/contents.xcworkspacedata
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator.xcodeproj/project.xcworkspace/xcuserdata/a0000.xcuserdatad/UserInterfaceState.xcuserstate
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/AppDelegate.swift
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Assets.xcassets/AccentColor.colorset/Contents.json
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Assets.xcassets/AppIcon.appiconset/Contents.json
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Assets.xcassets/Contents.json
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Base.lproj/LaunchScreen.storyboard
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Base.lproj/Main.storyboard
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Info.plist
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Quote.swift
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/SceneDelegate.swift
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/ViewController.swift
- create mode 100644 fc_30projects/TodoList/TodoList.xcodeproj/project.pbxproj
- create mode 100644 fc_30projects/TodoList/TodoList.xcodeproj/project.xcworkspace/contents.xcworkspacedata
- create mode 100644 fc_30projects/TodoList/TodoList.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
- create mode 100644 fc_30projects/TodoList/TodoList.xcodeproj/project.xcworkspace/xcuserdata/a0000.xcuserdatad/UserInterfaceState.xcuserstate
- create mode 100644 fc_30projects/TodoList/TodoList.xcodeproj/xcuserdata/a0000.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
- create mode 100644 fc_30projects/TodoList/TodoList/AppDelegate.swift
- create mode 100644 fc_30projects/TodoList/TodoList/Assets.xcassets/AccentColor.colorset/Contents.json
- create mode 100644 fc_30projects/TodoList/TodoList/Assets.xcassets/AppIcon.appiconset/Contents.json
- create mode 100644 fc_30projects/TodoList/TodoList/Assets.xcassets/Contents.json
- create mode 100644 fc_30projects/TodoList/TodoList/Base.lproj/LaunchScreen.storyboard
- create mode 100644 fc_30projects/TodoList/TodoList/Base.lproj/Main.storyboard
- create mode 100644 fc_30projects/TodoList/TodoList/Info.plist
- create mode 100644 fc_30projects/TodoList/TodoList/SceneDelegate.swift
- create mode 100644 fc_30projects/TodoList/TodoList/Task.swift
- create mode 100644 fc_30projects/TodoList/TodoList/ViewController.swift
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   master  git status
-On branch master
-nothing to commit, working tree clean
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   master  git push origin git@github.com:cestbonciel/iOS-TIL.git
-error: src refspec git@github.com does not match any
-error: failed to push some refs to 'origin'
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   master  git init
-hint: Using 'master' as the name for the initial branch. This default branch name
-hint: is subject to change. To configure the initial branch name to use in all
-hint: of your new repositories, which will suppress this warning, call:
-hint:
-hint: 	git config --global init.defaultBranch <name>
-hint:
-hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
-hint: 'development'. The just-created branch can be renamed via this command:
-hint:
-hint: 	git branch -m <name>
-Initialized empty Git repository in /Users/2022_Programming/2022_2nd.half/appPractice/.git/
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   master  ls
-DoItSwift_basic fc_30projects
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   master  git commit -m "my iOS study TIL"
-On branch master
-
-Initial commit
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	DoItSwift_basic/
-	fc_30projects/
-
-nothing added to commit but untracked files present (use "git add" to track)
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   master  git branch -M main
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   main  git remote add origin git@github.com:cestbonciel/iOS-TIL.git
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   main  git push -u origin main
-error: src refspec main does not match any
-error: failed to push some refs to 'github.com:cestbonciel/iOS-TIL.git'
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   main  git status
-On branch main
-
-No commits yet
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	DoItSwift_basic/
-	fc_30projects/
-
-nothing added to commit but untracked files present (use "git add" to track)
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   main  git add .
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   main ✚  git remote add origin git@github.com:cestbonciel/iOS-TIL.git
-error: remote origin already exists.
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   main ✚  git push -u origin main
-error: src refspec main does not match any
-error: failed to push some refs to 'github.com:cestbonciel/iOS-TIL.git'
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice   main ✚  ssh
-usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
-           [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
-           [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
-           [-i identity_file] [-J [user@]host[:port]] [-L address]
-           [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]
-           [-Q query_option] [-R address] [-S ctl_path] [-W host:port]
-           [-w local_tun[:remote_tun]] destination [command]
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  ssh
-login start
-ssh: Could not resolve hostname login: nodename nor servname provided, or not known
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  ssh
-git@github.com
-Enter passphrase for key '/Users/a0000/.ssh/id_rsa':
-Enter passphrase for key '/Users/a0000/.ssh/id_rsa':
-Enter passphrase for key '/Users/a0000/.ssh/id_rsa':
-PTY allocation request failed on channel 0
-Hi cestbonciel! You've successfully authenticated, but GitHub does not provide shell access.
-Connection to github.com closed.
-(base)  ✘ BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  ls
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/appPractice  cd ..
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half  git clone git@github.com:cestbonciel/iOS-TIL.git
-Cloning into 'iOS-TIL'...
-Enter passphrase for key '/Users/a0000/.ssh/id_rsa':
-remote: Enumerating objects: 5, done.
-remote: Counting objects: 100% (5/5), done.
-remote: Compressing objects: 100% (4/4), done.
-remote: Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
-Receiving objects: 100% (5/5), done.
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half  cd iOS-TIL
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/iOS-TIL   master  git status
-On branch master
-Your branch is up to date with 'origin/master'.
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	DoItSwift_basic/
-	fc_30projects/
-
-nothing added to commit but untracked files present (use "git add" to track)
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/iOS-TIL   master  git add .
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/iOS-TIL   master ✚  git status
-On branch master
-Your branch is up to date with 'origin/master'.
-
-Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-	new file:   DoItSwift_basic/Audio/Audio/Audio.xcodeproj/project.pbxproj
-	new file:   DoItSwift_basic/Audio/Audio/Audio.xcodeproj/project.xcworkspace/contents.xcworkspacedata
-	new file:   DoItSwift_basic/Audio/Audio/Audio.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
-	new file:   DoItSwift_basic/Audio/Audio/Audio/AppDelegate.swift
-	new file:   DoItSwift_basic/Audio/Audio/Audio/Assets.xcassets/AccentColor.colorset/Contents.json
-	new file:   DoItSwift_basic/Audio/Audio/Audio/Assets.xcassets/AppIcon.appiconset/Contents.json
-	new file:   DoItSwift_basic/Audio/Audio/Audio/Assets.xcassets/Contents.json
-	new file:   DoItSwift_basic/Audio/Audio/Audio/Base.lproj/LaunchScreen.storyboard
-	new file:   DoItSwift_basic/Audio/Audio/Audio/Base.lproj/Main.storyboard
-	new file:   DoItSwift_basic/Audio/Audio/Audio/Info.plist
-	new file:   DoItSwift_basic/Audio/Audio/Audio/SceneDelegate.swift
-	new file:   DoItSwift_basic/Audio/Audio/Audio/Sicilian_Breeze.mp3
-	new file:   DoItSwift_basic/Audio/Audio/Audio/ViewController.swift
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator.xcodeproj/project.pbxproj
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator.xcodeproj/project.xcworkspace/contents.xcworkspacedata
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator/AppDelegate.swift
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator/Assets.xcassets/AccentColor.colorset/Contents.json
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator/Assets.xcassets/AppIcon.appiconset/Contents.json
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator/Assets.xcassets/Contents.json
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator/Base.lproj/LaunchScreen.storyboard
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator/Base.lproj/Main.storyboard
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator/Info.plist
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator/Quote.swift
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator/SceneDelegate.swift
-	new file:   fc_30projects/QuotesGenerator/QuotesGenerator/ViewController.swift
-	new file:   fc_30projects/TodoList/TodoList.xcodeproj/project.pbxproj
-	new file:   fc_30projects/TodoList/TodoList.xcodeproj/project.xcworkspace/contents.xcworkspacedata
-	new file:   fc_30projects/TodoList/TodoList.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
-	new file:   fc_30projects/TodoList/TodoList/AppDelegate.swift
-	new file:   fc_30projects/TodoList/TodoList/Assets.xcassets/AccentColor.colorset/Contents.json
-	new file:   fc_30projects/TodoList/TodoList/Assets.xcassets/AppIcon.appiconset/Contents.json
-	new file:   fc_30projects/TodoList/TodoList/Assets.xcassets/Contents.json
-	new file:   fc_30projects/TodoList/TodoList/Base.lproj/LaunchScreen.storyboard
-	new file:   fc_30projects/TodoList/TodoList/Base.lproj/Main.storyboard
-	new file:   fc_30projects/TodoList/TodoList/Info.plist
-	new file:   fc_30projects/TodoList/TodoList/SceneDelegate.swift
-	new file:   fc_30projects/TodoList/TodoList/Task.swift
-	new file:   fc_30projects/TodoList/TodoList/ViewController.swift
-
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/iOS-TIL   master ✚  git commit -m "my iOS study TIL"
-[master b306b7b] my iOS study TIL
- 39 files changed, 2578 insertions(+)
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio.xcodeproj/project.pbxproj
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio.xcodeproj/project.xcworkspace/contents.xcworkspacedata
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/AppDelegate.swift
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/Assets.xcassets/AccentColor.colorset/Contents.json
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/Assets.xcassets/AppIcon.appiconset/Contents.json
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/Assets.xcassets/Contents.json
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/Base.lproj/LaunchScreen.storyboard
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/Base.lproj/Main.storyboard
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/Info.plist
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/SceneDelegate.swift
- create mode 100755 DoItSwift_basic/Audio/Audio/Audio/Sicilian_Breeze.mp3
- create mode 100644 DoItSwift_basic/Audio/Audio/Audio/ViewController.swift
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator.xcodeproj/project.pbxproj
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator.xcodeproj/project.xcworkspace/contents.xcworkspacedata
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/AppDelegate.swift
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Assets.xcassets/AccentColor.colorset/Contents.json
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Assets.xcassets/AppIcon.appiconset/Contents.json
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Assets.xcassets/Contents.json
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Base.lproj/LaunchScreen.storyboard
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Base.lproj/Main.storyboard
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Info.plist
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/Quote.swift
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/SceneDelegate.swift
- create mode 100644 fc_30projects/QuotesGenerator/QuotesGenerator/ViewController.swift
- create mode 100644 fc_30projects/TodoList/TodoList.xcodeproj/project.pbxproj
- create mode 100644 fc_30projects/TodoList/TodoList.xcodeproj/project.xcworkspace/contents.xcworkspacedata
- create mode 100644 fc_30projects/TodoList/TodoList.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
- create mode 100644 fc_30projects/TodoList/TodoList/AppDelegate.swift
- create mode 100644 fc_30projects/TodoList/TodoList/Assets.xcassets/AccentColor.colorset/Contents.json
- create mode 100644 fc_30projects/TodoList/TodoList/Assets.xcassets/AppIcon.appiconset/Contents.json
- create mode 100644 fc_30projects/TodoList/TodoList/Assets.xcassets/Contents.json
-# iOS-TIL
- create mode 100644 fc_30projects/TodoList/TodoList/Base.lproj/LaunchScreen.storyboard
- create mode 100644 fc_30projects/TodoList/TodoList/Base.lproj/Main.storyboard
- create mode 100644 fc_30projects/TodoList/TodoList/Info.plist
- create mode 100644 fc_30projects/TodoList/TodoList/SceneDelegate.swift
- create mode 100644 fc_30projects/TodoList/TodoList/Task.swift
- create mode 100644 fc_30projects/TodoList/TodoList/ViewController.swift
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/iOS-TIL   master  git push origin master
-Enter passphrase for key '/Users/a0000/.ssh/id_rsa':
-Enumerating objects: 51, done.
-Counting objects: 100% (51/51), done.
-Delta compression using up to 12 threads
-Compressing objects: 100% (45/45), done.
-Writing objects: 100% (50/50), 4.13 MiB | 935.00 KiB/s, done.
-Total 50 (delta 12), reused 0 (delta 0), pack-reused 0
-remote: Resolving deltas: 100% (12/12), done.
-To github.com:cestbonciel/iOS-TIL.git
-   b21d288..b306b7b  master -> master
-(base)  BeShyun 🌈   /Users/2022_Programming/2022_2nd.half/iOS-TIL   master 
+### Swift ###
 # Xcode
-#
-# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
-
-## User settings
-xcuserdata/
-
-## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
-*.xcscmblueprint
-*.xccheckout
-
-## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
-build/
-DerivedData/
-*.moved-aside
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
--- INSERT --# Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
@@ -367,13 +48,11 @@ timeline.xctimeline
 playground.xcworkspace
 
 # Swift Package Manager
-#
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
 # Packages/
 # Package.pins
 # Package.resolved
 # *.xcodeproj
-#
 # Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
 # hence it is not needed unless you have added a package configuration file to your project
 # .swiftpm
@@ -381,18 +60,14 @@ playground.xcworkspace
 .build/
 
 # CocoaPods
-#
 # We recommend against adding the Pods directory to your .gitignore. However
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-#
 # Pods/
-#
 # Add this line if you want to avoid checking in source code from the Xcode workspace
 # *.xcworkspace
 
 # Carthage
-#
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
 # Carthage/Checkouts
 
@@ -403,7 +78,6 @@ Dependencies/
 .accio/
 
 # fastlane
-#
 # It is recommended to not store the screenshots in the git repo.
 # Instead, use fastlane to re-generate the screenshots whenever they are needed.
 # For more information about the recommended setup visit:
@@ -415,8 +89,22 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 # Code Injection
-#
 # After new code Injection tools there's a generated folder /iOSInjectionProject
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+### Xcode ###
+
+## Xcode 8 and earlier
+
+### Xcode Patch ###
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+**/xcshareddata/WorkspaceSettings.xcsettings
+
+# End of https://www.toptal.com/developers/gitignore/api/swift,firebase,xcode
