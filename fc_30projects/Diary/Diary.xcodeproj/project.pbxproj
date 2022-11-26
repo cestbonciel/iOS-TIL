@@ -73,13 +73,13 @@
 				870704DA2922B7DB00063999 /* ViewController.swift */,
 				873FA74D292778FE007EF98F /* StarViewController.swift */,
 				873FA75129277CFA007EF98F /* WriteDiaryViewController.swift */,
+				873FA75329277D76007EF98F /* DiaryDetailViewController.swift */,
 				870704EA2922BEFC00063999 /* DiaryCell.swift */,
 				873FA74F29277ACC007EF98F /* StarCell.swift */,
 				870704DC2922B7DB00063999 /* Main.storyboard */,
 				870704DF2922B7E100063999 /* Assets.xcassets */,
 				870704E12922B7E100063999 /* LaunchScreen.storyboard */,
 				870704E42922B7E100063999 /* Info.plist */,
-				873FA75329277D76007EF98F /* DiaryDetailViewController.swift */,
 				873FA75529279190007EF98F /* Diary.swift */,
 			);
 			path = Diary;
