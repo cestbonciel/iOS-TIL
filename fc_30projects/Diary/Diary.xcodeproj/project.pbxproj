@@ -68,8 +68,8 @@
 		870704D52922B7DA00063999 /* Diary */ = {
 			isa = PBXGroup;
 			children = (
-				870704D62922B7DA00063999 /* AppDelegate.swift */,
-				870704D82922B7DA00063999 /* SceneDelegate.swift */,
+				879163A42935296A002FF727 /* Model */,
+				879163A3293528C4002FF727 /* DelegateFolder */,
 				870704DA2922B7DB00063999 /* ViewController.swift */,
 				873FA74D292778FE007EF98F /* StarViewController.swift */,
 				873FA75129277CFA007EF98F /* WriteDiaryViewController.swift */,
@@ -80,9 +80,25 @@
 				870704DF2922B7E100063999 /* Assets.xcassets */,
 				870704E12922B7E100063999 /* LaunchScreen.storyboard */,
 				870704E42922B7E100063999 /* Info.plist */,
-				873FA75529279190007EF98F /* Diary.swift */,
 			);
 			path = Diary;
+			sourceTree = "<group>";
+		};
+		879163A3293528C4002FF727 /* DelegateFolder */ = {
+			isa = PBXGroup;
+			children = (
+				870704D62922B7DA00063999 /* AppDelegate.swift */,
+				870704D82922B7DA00063999 /* SceneDelegate.swift */,
+			);
+			path = DelegateFolder;
+			sourceTree = "<group>";
+		};
+		879163A42935296A002FF727 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				873FA75529279190007EF98F /* Diary.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

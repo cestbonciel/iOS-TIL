@@ -81,23 +81,35 @@ class WriteDiaryViewController: UIViewController {
 		self.dateTextField.addTarget(self, action: #selector(dateTextFieldDidChange(_:)), for: .editingChanged)
 	}
 	// notification center 란 => 앱 내에서 메세지를 던지면 전달? 이벤트 버스 역할을 한다.
-	// 이벤트 등록 -> observign 한다. => 수정된 내용을 전달하자~!
+	// 이벤트 등록 -> observing 한다. => 수정된 내용을 전달하자~!
 	@IBAction func tapConfirmButton(_ sender: UIBarButtonItem) {
 		guard let title = self.titleTextField.text else { return }
 		guard let contents = self.contentsTextView.text else { return }
 		guard let date = self.diaryDate else { return }
-		let diary = Diary(title: title, contents: contents, date: date, isStar: false)
+		
 		
 		switch self.diaryEditorMode {
+			// 일기가 새로 만들어지게 되는 경우
 		case .new:
+			let diary = Diary(
+				uuidString: UUID().uuidString,
+				title: title,
+				contents: contents,
+				date: date,
+				isStar: false)
 			self.delegate?.didSelectRegister(diary: diary)
-		case let .edit(indexPath, _):
+		case let .edit(indexPath, diary):
+			let diary = Diary(
+				uuidString: diary.uuidString,
+				title: title,
+				contents: contents,
+				date: date,
+				isStar: diary.isStar)
+			// 수정된
 			NotificationCenter.default.post(
 				name: NSNotification.Name("editDiary"),
 				object: diary, // 수용된 내용의 다이어리 객체 전달
-				userInfo: [
-					"indexPath.row": indexPath.row
-				]
+				userInfo: nil
 			)
 		}
 //		self.delegate?.didSelectRegister(diary: diary)
