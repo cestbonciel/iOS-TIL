@@ -112,7 +112,6 @@ class WriteDiaryViewController: UIViewController {
 				userInfo: nil
 			)
 		}
-//		self.delegate?.didSelectRegister(diary: diary)
 		self.navigationController?.popViewController(animated: true)
 	}
 	

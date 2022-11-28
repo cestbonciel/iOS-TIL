@@ -94,7 +94,6 @@ class DiaryDetailViewController: UIViewController {
 	@objc func tapStarButton() {
 		// true 일 때 false, false 일 때 true
 		guard let isStar = self.diary?.isStar else { return }
-//		guard let indexPath = self.indexPath else { return }
 
 		if isStar {
 			self.starButton?.image = UIImage(systemName: "star")
