@@ -49,6 +49,6 @@ override func tableView(_ tableView: UITableView, commit editingStyle: UITableVi
 
 
 # 요약 
-1. UserNotifications, NotificationCenter 라이브러리를 Import 
+1. UserNotifications, NotificationCenter 라이브러리를 Import 
 2. 셀의 indexPath.row 에 uuid 값을 준다.
 3. 스위치 on / off 에 따라 알림 켰다 껐다 설정해주기
