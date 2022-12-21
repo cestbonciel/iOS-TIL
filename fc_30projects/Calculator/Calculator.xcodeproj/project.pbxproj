@@ -7,29 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8785061F28ABD71B009AB9D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785061E28ABD71B009AB9D3 /* AppDelegate.swift */; };
-		8785062128ABD71B009AB9D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785062028ABD71B009AB9D3 /* SceneDelegate.swift */; };
-		8785062328ABD71B009AB9D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8785062228ABD71B009AB9D3 /* ViewController.swift */; };
-		8785062628ABD71B009AB9D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8785062428ABD71B009AB9D3 /* Main.storyboard */; };
-		8785062828ABD71C009AB9D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8785062728ABD71C009AB9D3 /* Assets.xcassets */; };
-		8785062B28ABD71C009AB9D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8785062928ABD71C009AB9D3 /* LaunchScreen.storyboard */; };
-		8785063328AC0676009AB9D3 /* Sicilian_Breeze.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8785063228AC0676009AB9D3 /* Sicilian_Breeze.mp3 */; };
+		871314F62951F2CD0080597F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871314F52951F2CD0080597F /* AppDelegate.swift */; };
+		871314F82951F2CD0080597F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871314F72951F2CD0080597F /* SceneDelegate.swift */; };
+		871314FA2951F2CD0080597F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871314F92951F2CD0080597F /* ViewController.swift */; };
+		871314FD2951F2CD0080597F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 871314FB2951F2CD0080597F /* Main.storyboard */; };
+		871314FF2951F2CF0080597F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 871314FE2951F2CF0080597F /* Assets.xcassets */; };
+		871315022951F2CF0080597F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 871315002951F2CF0080597F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8785061B28ABD71A009AB9D3 /* Audio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Audio.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8785061E28ABD71B009AB9D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8785062028ABD71B009AB9D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8785062228ABD71B009AB9D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8785062528ABD71B009AB9D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8785062728ABD71C009AB9D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8785062A28ABD71C009AB9D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8785062C28ABD71C009AB9D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8785063228AC0676009AB9D3 /* Sicilian_Breeze.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sicilian_Breeze.mp3; sourceTree = "<group>"; };
+		871314F22951F2CD0080597F /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		871314F52951F2CD0080597F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		871314F72951F2CD0080597F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		871314F92951F2CD0080597F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		871314FC2951F2CD0080597F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		871314FE2951F2CF0080597F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		871315012951F2CF0080597F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		871315032951F2CF0080597F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8785061828ABD71A009AB9D3 /* Frameworks */ = {
+		871314EF2951F2CD0080597F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,73 +37,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8785061228ABD71A009AB9D3 = {
+		871314E92951F2CD0080597F = {
 			isa = PBXGroup;
 			children = (
-				8785061D28ABD71A009AB9D3 /* Audio */,
-				8785061C28ABD71A009AB9D3 /* Products */,
+				871314F42951F2CD0080597F /* Calculator */,
+				871314F32951F2CD0080597F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		8785061C28ABD71A009AB9D3 /* Products */ = {
+		871314F32951F2CD0080597F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8785061B28ABD71A009AB9D3 /* Audio.app */,
+				871314F22951F2CD0080597F /* Calculator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8785061D28ABD71A009AB9D3 /* Audio */ = {
+		871314F42951F2CD0080597F /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				8785063228AC0676009AB9D3 /* Sicilian_Breeze.mp3 */,
-				8785061E28ABD71B009AB9D3 /* AppDelegate.swift */,
-				8785062028ABD71B009AB9D3 /* SceneDelegate.swift */,
-				8785062228ABD71B009AB9D3 /* ViewController.swift */,
-				8785062428ABD71B009AB9D3 /* Main.storyboard */,
-				8785062728ABD71C009AB9D3 /* Assets.xcassets */,
-				8785062928ABD71C009AB9D3 /* LaunchScreen.storyboard */,
-				8785062C28ABD71C009AB9D3 /* Info.plist */,
+				871314F52951F2CD0080597F /* AppDelegate.swift */,
+				871314F72951F2CD0080597F /* SceneDelegate.swift */,
+				871314F92951F2CD0080597F /* ViewController.swift */,
+				871314FB2951F2CD0080597F /* Main.storyboard */,
+				871314FE2951F2CF0080597F /* Assets.xcassets */,
+				871315002951F2CF0080597F /* LaunchScreen.storyboard */,
+				871315032951F2CF0080597F /* Info.plist */,
 			);
-			path = Audio;
+			path = Calculator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8785061A28ABD71A009AB9D3 /* Audio */ = {
+		871314F12951F2CD0080597F /* Calculator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8785062F28ABD71C009AB9D3 /* Build configuration list for PBXNativeTarget "Audio" */;
+			buildConfigurationList = 871315062951F2CF0080597F /* Build configuration list for PBXNativeTarget "Calculator" */;
 			buildPhases = (
-				8785061728ABD71A009AB9D3 /* Sources */,
-				8785061828ABD71A009AB9D3 /* Frameworks */,
-				8785061928ABD71A009AB9D3 /* Resources */,
+				871314EE2951F2CD0080597F /* Sources */,
+				871314EF2951F2CD0080597F /* Frameworks */,
+				871314F02951F2CD0080597F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Audio;
-			productName = Audio;
-			productReference = 8785061B28ABD71A009AB9D3 /* Audio.app */;
+			name = Calculator;
+			productName = Calculator;
+			productReference = 871314F22951F2CD0080597F /* Calculator.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		8785061328ABD71A009AB9D3 /* Project object */ = {
+		871314EA2951F2CD0080597F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1320;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
-					8785061A28ABD71A009AB9D3 = {
-						CreatedOnToolsVersion = 13.2.1;
+					871314F12951F2CD0080597F = {
+						CreatedOnToolsVersion = 13.4.1;
 					};
 				};
 			};
-			buildConfigurationList = 8785061628ABD71A009AB9D3 /* Build configuration list for PBXProject "Audio" */;
+			buildConfigurationList = 871314ED2951F2CD0080597F /* Build configuration list for PBXProject "Calculator" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -113,56 +110,55 @@
 				en,
 				Base,
 			);
-			mainGroup = 8785061228ABD71A009AB9D3;
-			productRefGroup = 8785061C28ABD71A009AB9D3 /* Products */;
+			mainGroup = 871314E92951F2CD0080597F;
+			productRefGroup = 871314F32951F2CD0080597F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8785061A28ABD71A009AB9D3 /* Audio */,
+				871314F12951F2CD0080597F /* Calculator */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8785061928ABD71A009AB9D3 /* Resources */ = {
+		871314F02951F2CD0080597F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8785062B28ABD71C009AB9D3 /* LaunchScreen.storyboard in Resources */,
-				8785063328AC0676009AB9D3 /* Sicilian_Breeze.mp3 in Resources */,
-				8785062828ABD71C009AB9D3 /* Assets.xcassets in Resources */,
-				8785062628ABD71B009AB9D3 /* Main.storyboard in Resources */,
+				871315022951F2CF0080597F /* LaunchScreen.storyboard in Resources */,
+				871314FF2951F2CF0080597F /* Assets.xcassets in Resources */,
+				871314FD2951F2CD0080597F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8785061728ABD71A009AB9D3 /* Sources */ = {
+		871314EE2951F2CD0080597F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8785062328ABD71B009AB9D3 /* ViewController.swift in Sources */,
-				8785061F28ABD71B009AB9D3 /* AppDelegate.swift in Sources */,
-				8785062128ABD71B009AB9D3 /* SceneDelegate.swift in Sources */,
+				871314FA2951F2CD0080597F /* ViewController.swift in Sources */,
+				871314F62951F2CD0080597F /* AppDelegate.swift in Sources */,
+				871314F82951F2CD0080597F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8785062428ABD71B009AB9D3 /* Main.storyboard */ = {
+		871314FB2951F2CD0080597F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8785062528ABD71B009AB9D3 /* Base */,
+				871314FC2951F2CD0080597F /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		8785062928ABD71C009AB9D3 /* LaunchScreen.storyboard */ = {
+		871315002951F2CF0080597F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8785062A28ABD71C009AB9D3 /* Base */,
+				871315012951F2CF0080597F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -170,14 +166,13 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		8785062D28ABD71C009AB9D3 /* Debug */ = {
+		871315042951F2CF0080597F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -221,7 +216,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -231,14 +226,13 @@
 			};
 			name = Debug;
 		};
-		8785062E28ABD71C009AB9D3 /* Release */ = {
+		871315052951F2CF0080597F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -276,7 +270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -286,16 +280,16 @@
 			};
 			name = Release;
 		};
-		8785063028ABD71C009AB9D3 /* Debug */ = {
+		871315072951F2CF0080597F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2P5FNS3JAJ;
+				DEVELOPMENT_TEAM = U56QVJ4XLS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Audio/Info.plist;
+				INFOPLIST_FILE = Calculator/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -306,24 +300,24 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.seohyun.iOSApp.Audio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seohyun.iOSApp.Calculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		8785063128ABD71C009AB9D3 /* Release */ = {
+		871315082951F2CF0080597F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2P5FNS3JAJ;
+				DEVELOPMENT_TEAM = U56QVJ4XLS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Audio/Info.plist;
+				INFOPLIST_FILE = Calculator/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -334,36 +328,36 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.seohyun.iOSApp.Audio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seohyun.iOSApp.Calculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8785061628ABD71A009AB9D3 /* Build configuration list for PBXProject "Audio" */ = {
+		871314ED2951F2CD0080597F /* Build configuration list for PBXProject "Calculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8785062D28ABD71C009AB9D3 /* Debug */,
-				8785062E28ABD71C009AB9D3 /* Release */,
+				871315042951F2CF0080597F /* Debug */,
+				871315052951F2CF0080597F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8785062F28ABD71C009AB9D3 /* Build configuration list for PBXNativeTarget "Audio" */ = {
+		871315062951F2CF0080597F /* Build configuration list for PBXNativeTarget "Calculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8785063028ABD71C009AB9D3 /* Debug */,
-				8785063128ABD71C009AB9D3 /* Release */,
+				871315072951F2CF0080597F /* Debug */,
+				871315082951F2CF0080597F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 8785061328ABD71A009AB9D3 /* Project object */;
+	rootObject = 871314EA2951F2CD0080597F /* Project object */;
 }
