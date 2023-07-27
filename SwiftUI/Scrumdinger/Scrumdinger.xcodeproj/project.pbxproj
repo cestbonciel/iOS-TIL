@@ -26,6 +26,7 @@
 		877034622A6F0CD00050D29D /* ScrumProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877034612A6F0CD00050D29D /* ScrumProgressViewStyle.swift */; };
 		877034642A6F11CC0050D29D /* AVPlayer+Ding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877034632A6F11CC0050D29D /* AVPlayer+Ding.swift */; };
 		877034672A6F12130050D29D /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = 877034662A6F12130050D29D /* ding.wav */; };
+		877164342A72EF5E004555C5 /* ScrumStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877164332A72EF5E004555C5 /* ScrumStore.swift */; };
 		87CAA6542A72DE93007EF017 /* NewScrumSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CAA6532A72DE93007EF017 /* NewScrumSheet.swift */; };
 		87CAA6562A72E21F007EF017 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CAA6552A72E21F007EF017 /* History.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		877034612A6F0CD00050D29D /* ScrumProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrumProgressViewStyle.swift; sourceTree = "<group>"; };
 		877034632A6F11CC0050D29D /* AVPlayer+Ding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVPlayer+Ding.swift"; sourceTree = "<group>"; };
 		877034662A6F12130050D29D /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
+		877164332A72EF5E004555C5 /* ScrumStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrumStore.swift; sourceTree = "<group>"; };
 		87CAA6532A72DE93007EF017 /* NewScrumSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScrumSheet.swift; sourceTree = "<group>"; };
 		87CAA6552A72E21F007EF017 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +113,7 @@
 				8770345D2A6F04530050D29D /* ScrumTimer.swift */,
 				877034632A6F11CC0050D29D /* AVPlayer+Ding.swift */,
 				87CAA6552A72E21F007EF017 /* History.swift */,
+				877164332A72EF5E004555C5 /* ScrumStore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				877034542A6D96CF0050D29D /* DetailView.swift in Sources */,
 				877034602A6F0B3A0050D29D /* MeetingFooterView.swift in Sources */,
 				8770345C2A6EF6370050D29D /* MeetingHeaderView.swift in Sources */,
+				877164342A72EF5E004555C5 /* ScrumStore.swift in Sources */,
 				877034562A6EC9220050D29D /* DetailEditView.swift in Sources */,
 				877034512A6D88470050D29D /* ScrumsView.swift in Sources */,
 				877034352A6D51BA0050D29D /* MeetingView.swift in Sources */,
