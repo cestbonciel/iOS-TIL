@@ -4,7 +4,6 @@
 //
 //  Created by Seohyun Kim on 2023/07/25.
 //
-
 import SwiftUI
 
 struct MeetingHeaderView: View {
@@ -45,6 +44,7 @@ struct MeetingHeaderView: View {
 		.accessibilityElement(children: .ignore)
 		.accessibilityLabel("Time remaining")
 		.accessibilityValue("\(minutesRemaining) minutes")
+		.padding([.top, .horizontal])
 		.padding([.top, .horizontal])
     }
 		

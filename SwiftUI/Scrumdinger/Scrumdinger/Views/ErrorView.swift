@@ -16,7 +16,6 @@ struct ErrorView: View {
 			VStack {
 				Text("An error has occurred!")
 					.font(.title)
-					.foregroundColor(.red)
 					.padding(.bottom)
 				Text(errorWrapper.error.localizedDescription)
 					.font(.headline)

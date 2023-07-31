@@ -16,13 +16,15 @@ class ScrumStore: ObservableObject {
 									in: .userDomainMask,
 									appropriateFor: nil,
 									create: false)
-			.appendingPathComponent("scrums.data")
+		.appendingPathComponent("scrums.data")
 	}
 	
 	func load() async throws {
 		let task = Task<[DailyScrum], Error> {
 			let fileURL = try Self.fileURL()
-			guard let data = try? Data(contentsOf: fileURL) else { return [] }
+			guard let data = try? Data(contentsOf: fileURL) else {
+				return []
+			}
 			let dailyScrums = try JSONDecoder().decode([DailyScrum].self, from: data)
 			return dailyScrums
 		}

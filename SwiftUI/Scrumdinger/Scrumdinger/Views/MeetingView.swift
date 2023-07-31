@@ -11,14 +11,11 @@ import AVFoundation
 struct MeetingView: View {
 	@Binding var scrum: DailyScrum
 	@StateObject var scrumTimer = ScrumTimer()
-	/*
-	 Property 를 @StateObject 로 감싸는 것은 뷰가 객체에 대한 정보 소스를 소유한다는 것을 의미
-	 */
-	
+//Property 를 @StateObject 로 감싸는 것은 뷰가 객체에 대한 정보 소스를 소유한다는 것을 의미
+	 
 	private var player: AVPlayer { AVPlayer.sharedDingPlayer }
 	
     var body: some View {
-		
 		ZStack {
 			RoundedRectangle(cornerRadius: 16.0)
 				.fill(scrum.theme.mainColor)
@@ -52,11 +49,7 @@ struct MeetingView: View {
 		scrumTimer.stopScrum()
 		let newHistory = History(attendees: scrum.attendees)
 		scrum.history.insert(newHistory, at: 0)
-	}
-
-    
-
-    
+	}    
 }
 
 struct MeetingView_Previews: PreviewProvider {

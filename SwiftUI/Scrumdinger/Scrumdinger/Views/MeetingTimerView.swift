@@ -12,6 +12,7 @@ struct MeetingTimerView: View {
 	let theme: Theme
 	
 	private var currentSpeaker: String {
+		// Nil-Coalescing Operator a! nil ? a! : b 
 		speakers.first(where: { !$0.isCompleted})?.name ?? "Someone"
 	}
 	

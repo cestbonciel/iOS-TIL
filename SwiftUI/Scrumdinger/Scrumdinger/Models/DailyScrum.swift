@@ -12,7 +12,7 @@ struct DailyScrum: Identifiable, Codable {
 	var title: String
 	var attendees: [Attendee]
 	var lengthInMinutes: Int
-	var lengthInMinutresAsDouble: Double {
+	var lengthInMinutesAsDouble: Double {
 		get {
 			Double(lengthInMinutes)
 		}

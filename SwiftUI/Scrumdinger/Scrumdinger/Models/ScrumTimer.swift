@@ -39,7 +39,7 @@ final class ScrumTimer: ObservableObject {
 	private var startDate: Date?
 	
 	/**
-	 initialize a new timer. Initializing a time with no arguments creates a ScrumTimer with no attendees and zero lenth.
+	 initialize a new timer. Initializing a time with no arguments creates a ScrumTimer with no attendees and zero length.
 	 Use `StartScrum()` to start the timer.
 	 
 	 - Parameters:
@@ -84,7 +84,6 @@ final class ScrumTimer: ObservableObject {
 		speakerIndex = index
 		activeSpeaker = speakerText
 		
-		
 		secondsElapsed = index * secondsPerSpeaker
 		secondsRemaining = lengthInSeconds - secondsElapsed
 		startDate = Date()
@@ -94,16 +93,16 @@ final class ScrumTimer: ObservableObject {
 		
 		Task { @MainActor in
 			guard let startDate,
-					!timerStopped else { return }
-			let secondElapsed = Int(Date().timeIntervalSince1970 - startDate.timeIntervalSince1970)
-			secondsElapsedForSpeaker = secondElapsed
+				  !timerStopped else { return }
+			let secondsElapsed = Int(Date().timeIntervalSince1970 - startDate.timeIntervalSince1970)
+			secondsElapsedForSpeaker = secondsElapsed
 			self.secondsElapsed = secondsPerSpeaker * speakerIndex + secondsElapsedForSpeaker
 			guard secondsElapsed <= secondsPerSpeaker else {
 				return
 			}
 			
 			secondsRemaining = max(lengthInSeconds - self.secondsElapsed, 0)
-			
+
 			if secondsElapsedForSpeaker >= secondsPerSpeaker {
 				changeToSpeaker(at: speakerIndex + 1)
 				speakerChangedAction?()
