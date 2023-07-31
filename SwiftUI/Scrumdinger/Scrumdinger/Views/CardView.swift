@@ -35,6 +35,6 @@ struct CardView_Previews: PreviewProvider {
     static var previews: some View {
 		CardView(scrum: scrum)
 			.background(scrum.theme.mainColor)
-			.previewLayout(.fixed(width: 400, height: 600))
+			.previewLayout(.fixed(width: 400, height: 60))
     }
 }

@@ -22,6 +22,7 @@ struct MeetingHeaderView: View {
 	private var minutesRemaining: Int {
 		secondsRemaining / 60
 	}
+	
     var body: some View {
 		VStack {
 			ProgressView(value: progress)
@@ -30,13 +31,13 @@ struct MeetingHeaderView: View {
 				VStack(alignment: .leading) {
 					Text("Second Elapsed")
 						.font(.caption)
-					Label("\(secondsElapsed)", systemImage: "hourglass.bottomhalf.fill")
+					Label("\(secondsElapsed)", systemImage: "hourglass.tophalf.fill")
 				}
 				Spacer()
 				VStack(alignment: .trailing) {
 					Text("Second Remaining")
 						.font(.caption)
-					Label("\(secondsRemaining)", systemImage: "hourglass.tophalf.fill")
+					Label("\(secondsRemaining)", systemImage: "hourglass.bottomhalf.fill")
 						.labelStyle(.trailingIcon)
 				}
 			}

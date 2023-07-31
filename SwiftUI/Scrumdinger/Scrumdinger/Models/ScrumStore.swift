@@ -12,7 +12,10 @@ class ScrumStore: ObservableObject {
 	@Published var scrums: [DailyScrum] = []
 	
 	private static func fileURL() throws -> URL {
-		try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+		try FileManager.default.url(for: .documentDirectory,
+									in: .userDomainMask,
+									appropriateFor: nil,
+									create: false)
 			.appendingPathComponent("scrums.data")
 	}
 	
@@ -34,5 +37,6 @@ class ScrumStore: ObservableObject {
 			try data.write(to: outfile)
 		}
 		_ = try await task.value
+		// _ 은 task.value의 결과에 관심이 없음을 나타남 
 	}
 }
