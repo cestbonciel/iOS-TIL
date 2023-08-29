@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		87B085E52A9E4C2500FE3AC5 /* ReminderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B085E42A9E4C2500FE3AC5 /* ReminderListViewController.swift */; };
+		87B085EC2A9E4DF700FE3AC5 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B085EB2A9E4DF700FE3AC5 /* Reminder.swift */; };
 		87FBA7442A9E0833009B4086 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FBA7432A9E0833009B4086 /* AppDelegate.swift */; };
 		87FBA7462A9E0833009B4086 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FBA7452A9E0833009B4086 /* SceneDelegate.swift */; };
 		87FBA74B2A9E0833009B4086 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87FBA7492A9E0833009B4086 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		87B085E42A9E4C2500FE3AC5 /* ReminderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewController.swift; sourceTree = "<group>"; };
+		87B085EB2A9E4DF700FE3AC5 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		87FBA7402A9E0833009B4086 /* Today.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Today.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87FBA7432A9E0833009B4086 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87FBA7452A9E0833009B4086 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +39,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		87B085E62A9E4DC100FE3AC5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				87B085EB2A9E4DF700FE3AC5 /* Reminder.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		87FBA7372A9E0833009B4086 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +66,7 @@
 		87FBA7422A9E0833009B4086 /* Today */ = {
 			isa = PBXGroup;
 			children = (
+				87B085E62A9E4DC100FE3AC5 /* Models */,
 				87FBA7432A9E0833009B4086 /* AppDelegate.swift */,
 				87FBA7452A9E0833009B4086 /* SceneDelegate.swift */,
 				87B085E42A9E4C2500FE3AC5 /* ReminderListViewController.swift */,
@@ -141,6 +152,7 @@
 				87FBA7442A9E0833009B4086 /* AppDelegate.swift in Sources */,
 				87B085E52A9E4C2500FE3AC5 /* ReminderListViewController.swift in Sources */,
 				87FBA7462A9E0833009B4086 /* SceneDelegate.swift in Sources */,
+				87B085EC2A9E4DF700FE3AC5 /* Reminder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

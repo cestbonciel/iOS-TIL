@@ -2,7 +2,7 @@
 //  Reminder.swift
 //  Today
 //
-//  Created by Seohyun Kim on 2023/08/29.
+//  Created by Seohyun Kim on 2023/08/30.
 //
 
 import Foundation
@@ -57,4 +57,3 @@ extension Reminder {
 	]
 }
 #endif
-
