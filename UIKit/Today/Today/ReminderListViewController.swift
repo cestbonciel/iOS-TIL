@@ -1,5 +1,12 @@
 //
-//  ViewController.swift
+//  ReminderListViewController.swift
+//  Today
+//
+//  Created by Seohyun Kim on 2023/08/30.
+//
+
+//
+//  ReminderListViewController.swift
 //  Today
 //
 //  Created by Seohyun Kim on 2023/08/29.
