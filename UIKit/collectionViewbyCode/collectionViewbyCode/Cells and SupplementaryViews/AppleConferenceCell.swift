@@ -42,10 +42,10 @@ extension AppleConferenceCell {
 		
 		imageView.layer.borderColor = UIColor.gray.cgColor
 		imageView.layer.borderWidth = 1
-		imageView.layer.cornerRadius = 4
+		imageView.layer.cornerRadius = 10
 		imageView.backgroundColor = UIColor.melon
 		
-		let spacing = CGFloat(10)
+		let spacing = CGFloat(20)
 		NSLayoutConstraint.activate([
 			imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
 			imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
