@@ -11,6 +11,7 @@
 		877E97932AA86D3500EFEB1F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877E97922AA86D3500EFEB1F /* ContentView.swift */; };
 		877E97952AA86D3600EFEB1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 877E97942AA86D3600EFEB1F /* Assets.xcassets */; };
 		877E97982AA86D3600EFEB1F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 877E97972AA86D3600EFEB1F /* Preview Assets.xcassets */; };
+		87A16CFD2AA9C2C40010A0EB /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A16CFC2AA9C2C40010A0EB /* CustomButtonView.swift */; };
 		87A7771B2AA8B0F800760EE1 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A7771A2AA8B0F800760EE1 /* CardView.swift */; };
 		87A7771E2AA8B33700760EE1 /* CustomBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A7771D2AA8B33700760EE1 /* CustomBackgroundView.swift */; };
 		87A777212AA8B4E900760EE1 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A777202AA8B4E900760EE1 /* ColorExtension.swift */; };
@@ -22,6 +23,7 @@
 		877E97922AA86D3500EFEB1F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		877E97942AA86D3600EFEB1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		877E97972AA86D3600EFEB1F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		87A16CFC2AA9C2C40010A0EB /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonView.swift; sourceTree = "<group>"; };
 		87A7771A2AA8B0F800760EE1 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		87A7771D2AA8B33700760EE1 /* CustomBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackgroundView.swift; sourceTree = "<group>"; };
 		87A777202AA8B4E900760EE1 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			children = (
 				87A7771A2AA8B0F800760EE1 /* CardView.swift */,
 				87A7771D2AA8B33700760EE1 /* CustomBackgroundView.swift */,
+				87A16CFC2AA9C2C40010A0EB /* CustomButtonView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 				877E97932AA86D3500EFEB1F /* ContentView.swift in Sources */,
 				87A7771B2AA8B0F800760EE1 /* CardView.swift in Sources */,
 				877E97912AA86D3500EFEB1F /* HikeApp.swift in Sources */,
+				87A16CFD2AA9C2C40010A0EB /* CustomButtonView.swift in Sources */,
 				87A7771E2AA8B33700760EE1 /* CustomBackgroundView.swift in Sources */,
 				87A777212AA8B4E900760EE1 /* ColorExtension.swift in Sources */,
 			);
