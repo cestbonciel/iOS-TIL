@@ -36,7 +36,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
 		} else {
 			textField.placeholder = "도시를 입력하세요."
 			return false
-		}
+		} 
 	}
 	
 	

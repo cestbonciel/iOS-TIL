@@ -34,6 +34,7 @@ class ViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRecorderDel
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
 		selectAudioFile()
 		if !isRecordMode {
 			initPlay()
