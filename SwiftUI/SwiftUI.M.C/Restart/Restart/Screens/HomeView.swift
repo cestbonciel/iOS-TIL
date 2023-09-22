@@ -30,7 +30,7 @@ struct HomeView: View {
 				//MARK: - CENTER
 				Text("""
 			 Art is the lie that enables us to realize the truth.
-			 - Pablo Picsso
+			 - Pablo Picasso
 			""")
 				.font(.title3)
 				.fontWeight(.light)
