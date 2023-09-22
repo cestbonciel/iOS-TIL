@@ -14,6 +14,9 @@ struct OnboardingView: View {
 	@State private var buttonWidth: Double = UIScreen.main.bounds.width - 80
 	@State private var buttonOffset: CGFloat = 0
 	@State private var isAnimating: Bool = false
+	@State private var imageOffset: CGSize = .zero
+	@State private var indicatorOpacity: Double = 1.0
+	@State private var textTitle: String = "Go Forward."
 	
 	// MARK: - Body
     var body: some View {
@@ -27,11 +30,12 @@ struct OnboardingView: View {
 					Spacer()
 					
 					VStack(spacing: 0) {
-						Text("Go Foward.")
+						Text(textTitle)
 							.font(.system(size: 60))
 							.fontWeight(.heavy)
 							.foregroundColor(.white)
-						
+							.transition(.opacity)
+							.id(textTitle)
 						Text("""
 	 Every day growing day by day.
 	 """)
@@ -39,7 +43,7 @@ struct OnboardingView: View {
 						.fontWeight(.light)
 						.foregroundColor(.white)
 						.multilineTextAlignment(.center)
-						.padding(.horizontal, 20)
+						.padding(.horizontal, 10)
 					}// : HEADER
 					.opacity(isAnimating ? 1 : 0)
 					.offset(y: isAnimating ? 0 : -40)
@@ -49,14 +53,52 @@ struct OnboardingView: View {
 					
 					ZStack {
 						CircleGroupView(shapeColor: .white, shapeOpacity: 0.2)
-						
+							.offset(x: imageOffset.width * -1)
+							.blur(radius: abs(imageOffset.width / 5))
+							.animation(.easeOut(duration: 1), value: imageOffset)
 						//  This image has copyright 2020 © Seohyun Kim all right reserved.
 						Image("IMG_8624")
 							.resizable()
 							.scaledToFit()
-							.padding(80)
+							.frame(width: 200, height: 200)
+							.opacity(isAnimating ? 1 : 0)
 							.animation(.easeOut(duration: 0.5), value: isAnimating)
+							.offset(x: imageOffset.width * 1.2, y: 0)
+							.rotationEffect(.degrees(Double(imageOffset.width / 20)))
+							.gesture(
+								DragGesture()
+									.onChanged({ gesture in
+										if abs(imageOffset.width) <= 150 {
+											imageOffset = gesture.translation
+											
+											withAnimation(.linear(duration: 0.5)) {
+												indicatorOpacity = 0
+//												textTitle = "Grow."
+											}
+										}
+									})
+									.onEnded({ _ in
+										imageOffset = .zero
+										
+										withAnimation(.linear(duration: 0.25)) {
+											indicatorOpacity = 1
+											textTitle = "Go Forward."
+										}
+									})
+							)//: GESTURE
+							.animation(.easeOut(duration: 1), value: imageOffset)
 					}//: CETER
+					.overlay(
+						Image(systemName: "arrow.left.and.right.circle")
+							.font(.system(size: 44, weight: .ultraLight))
+							.foregroundColor(.white)
+							.offset(y: 20)
+							.opacity(isAnimating ? 1 : 0)
+							.animation(.easeOut(duration: 1).delay(2), value: isAnimating)
+							.opacity(indicatorOpacity)
+						, alignment: .bottom
+					)
+					
 					Spacer()
 					// MARK: - FOOTER
 					ZStack {
