@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		87121FFB2ABDB77600A8008A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87121FFA2ABDB77600A8008A /* Assets.xcassets */; };
 		87121FFD2ABDBB6400A8008A /* CircleGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87121FFC2ABDBB6400A8008A /* CircleGroupView.swift */; };
+		87121FFF2ABDF02000A8008A /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87121FFE2ABDF02000A8008A /* AudioPlayer.swift */; };
 		872CC26E2ABC868000D93973 /* RestartApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872CC26D2ABC868000D93973 /* RestartApp.swift */; };
 		872CC2702ABC868000D93973 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872CC26F2ABC868000D93973 /* ContentView.swift */; };
 		872CC2752ABC868100D93973 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 872CC2742ABC868100D93973 /* Preview Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		87121FFA2ABDB77600A8008A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Restart/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		87121FFC2ABDBB6400A8008A /* CircleGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGroupView.swift; sourceTree = "<group>"; };
+		87121FFE2ABDF02000A8008A /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		872CC26A2ABC868000D93973 /* Restart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Restart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		872CC26D2ABC868000D93973 /* RestartApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestartApp.swift; sourceTree = "<group>"; };
 		872CC26F2ABC868000D93973 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		872CC27C2ABC86B500D93973 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				87121FFE2ABDF02000A8008A /* AudioPlayer.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				872CC2872ABC8AAB00D93973 /* HomeView.swift in Sources */,
 				872CC2702ABC868000D93973 /* ContentView.swift in Sources */,
 				872CC26E2ABC868000D93973 /* RestartApp.swift in Sources */,
+				87121FFF2ABDF02000A8008A /* AudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

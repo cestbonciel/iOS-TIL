@@ -18,6 +18,8 @@ struct OnboardingView: View {
 	@State private var indicatorOpacity: Double = 1.0
 	@State private var textTitle: String = "Go Forward."
 	
+	let hapticFeedback = UINotificationFeedbackGenerator()
+	
 	// MARK: - Body
     var body: some View {
 			ZStack {
@@ -71,9 +73,9 @@ struct OnboardingView: View {
 										if abs(imageOffset.width) <= 150 {
 											imageOffset = gesture.translation
 											
-											withAnimation(.linear(duration: 0.5)) {
+											withAnimation(.linear(duration: 0.25)) {
 												indicatorOpacity = 0
-//												textTitle = "Grow."
+												textTitle = "Grow."
 											}
 										}
 									})
@@ -87,7 +89,7 @@ struct OnboardingView: View {
 									})
 							)//: GESTURE
 							.animation(.easeOut(duration: 1), value: imageOffset)
-					}//: CETER
+					}//: CENTER
 					.overlay(
 						Image(systemName: "arrow.left.and.right.circle")
 							.font(.system(size: 44, weight: .ultraLight))
@@ -153,9 +155,12 @@ struct OnboardingView: View {
 									.onEnded { _ in
 										withAnimation(Animation.easeOut(duration: 0.8)) {
 											if buttonOffset > buttonWidth / 2 {
+												hapticFeedback.notificationOccurred(.success)
+												playSound(sound: "chimeup", type: "mp3")
 												buttonOffset = buttonWidth - 80
 												isOnboardingViewActive = false
 											} else {
+												hapticFeedback.notificationOccurred(.warning)
 												buttonOffset = 0
 											}
 										}
@@ -175,6 +180,7 @@ struct OnboardingView: View {
 			.onAppear {
 				isAnimating = true
 			}
+			.preferredColorScheme(.dark)
     }
 }
 
