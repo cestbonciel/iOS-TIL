@@ -11,6 +11,8 @@ struct HomeView: View {
 	//MARK: - Property
 	
 	@AppStorage("onboarding") var isOnboardingViewActive: Bool = false
+	@State private var isAnimating: Bool = false
+	
 	//MARK: - Body
     var body: some View {
 			VStack(spacing: 20) {
@@ -21,10 +23,18 @@ struct HomeView: View {
 				// This image has copyright 2020 © Seohyun Kim all right reserved.
 				ZStack {
 					CircleGroupView(shapeColor: .gray, shapeOpacity: 0.1)
+					
 					Image("IMG_8622")
 						.resizable()
 						.scaledToFit()
 					.padding(80)
+					.offset(y: isAnimating ? 35 : -35)
+					.animation(
+						Animation
+							.easeOut(duration: 4)
+							.repeatForever()
+						,	value: isAnimating
+					)
 				}
 				
 				//MARK: - CENTER
@@ -43,7 +53,9 @@ struct HomeView: View {
 				Spacer()
 				
 				Button {
-					isOnboardingViewActive = true
+					withAnimation {
+						isOnboardingViewActive = true
+					}
 				} label: {
 					Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
 						.imageScale(.large)
@@ -55,7 +67,10 @@ struct HomeView: View {
 				.buttonStyle(.borderedProminent)
 				.buttonBorderShape(.capsule)
 				.controlSize(.large)
-
+			}//: VSTACK
+			.onAppear {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { isAnimating = true
+				})
 			}
     }
 }
