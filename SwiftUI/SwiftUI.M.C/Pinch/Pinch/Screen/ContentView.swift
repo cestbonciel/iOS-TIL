@@ -45,7 +45,7 @@ struct ContentView: View {
 									imageScale = 5
 								}
 							} else {
-								resetImageState() 
+								resetImageState()
 							}
 						})
 					//MARK: - 2. DRAG GESTURE
