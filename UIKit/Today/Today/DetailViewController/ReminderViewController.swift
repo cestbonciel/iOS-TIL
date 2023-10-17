@@ -10,6 +10,7 @@ import UIKit
 class ReminderViewController: UICollectionViewController {
 	private typealias DataSource = UICollectionViewDiffableDataSource<Section, Row>
 	private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Row>
+	
 	var reminder: Reminder
 	private var dataSource: DataSource!
 	
@@ -55,9 +56,8 @@ class ReminderViewController: UICollectionViewController {
 		let section = section(for: indexPath)
 		switch (section, row) {
 		case (_, .header(let title)):
-			var contentConfiguration = cell.defaultContentConfiguration()
-			contentConfiguration.text = title
-			cell.contentConfiguration = contentConfiguration
+			
+			cell.contentConfiguration = headerConfiguration(for: cell, with: title)
 		case (.view, _):
 			var contentConfiguration = cell.defaultContentConfiguration()
 			contentConfiguration.text = text(for: row)
@@ -67,16 +67,6 @@ class ReminderViewController: UICollectionViewController {
 //			cell.tintColor = .todayPrimaryTint
 		default:
 			fatalError("Unexpected combination of section and row.")
-		}
-	}
-	
-	func text(for row: Row) -> String? {
-		switch row {
-		case .date: return reminder.dueDate.dayText
-		case .notes: return reminder.notes
-		case .time: return reminder.dueDate.formatted(date: .omitted, time: .shortened)
-		case .title: return reminder.title
-		default: return nil
 		}
 	}
 	
