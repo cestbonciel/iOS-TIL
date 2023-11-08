@@ -12,7 +12,7 @@ struct SettingsView: View {
 	@Environment(\.presentationMode) var presentationMode
 	//MARK: - BODY
 	var body: some View {
-		NavigationView {
+		NavigationStack {
 			ScrollView(.vertical, showsIndicators: false) {
 				VStack(spacing: 20) {
 					//MARK: - SECTION 1
@@ -37,6 +37,19 @@ struct SettingsView: View {
 					//MARK: - SECTION 2
 					
 					//MARK: - SECTION 3
+					GroupBox(
+						label:
+						SettingsLabelView(labelText: "Application", labelImage: "apps.iphone")
+					) {
+						SettingsRowView(name: "Developer", content: "John / Jane")
+						SettingsRowView(name: "Designer", content: "Seohyun Kim")
+						SettingsRowView(name: "Compatibility", content: "iOS 16")
+						SettingsRowView(name: "Website", linkLabel: "Seohyun", linkDestination: "github.com/cestbonciel/iOS-TIL/tree/master/SwiftUI")
+						SettingsRowView(name: "WWDC", linkLabel: "Apple", linkDestination: "developer.apple.com/wwdc23/")
+						SettingsRowView(name: "SwiftUI",content: "5.0")
+						SettingsRowView(name: "Version",content: "1.0.0")
+					}
+					
 				}//: VSTACK
 				.navigationBarTitle(Text("Settings"), displayMode: .large)
 				.navigationBarItems(
