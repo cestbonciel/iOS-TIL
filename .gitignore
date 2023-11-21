@@ -1,6 +1,13 @@
 # Created by https://www.toptal.com/developers/gitignore/api/swift,firebase,xcode
 # Edit at https://www.toptal.com/developers/gitignore?templates=swift,firebase,xcode
 
+
+#MAC
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
+
 ### Firebase ###
 .idea
 **/node_modules/*
