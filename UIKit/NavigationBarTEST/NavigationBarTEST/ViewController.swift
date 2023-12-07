@@ -11,8 +11,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Bar Items"
-        view.backgroundColor = .systemPink
+//        title = "Bar Items"
+        view.backgroundColor = .lightGray
         configureItems()
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
         view.addSubview(button)
