@@ -51,7 +51,7 @@ class SwitchTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+  
     override func layoutSubviews() {
         super.layoutSubviews()
         let size: CGFloat = contentView.frame.size.height - 12
@@ -59,7 +59,6 @@ class SwitchTableViewCell: UITableViewCell {
         
         let imageSize: CGFloat = size/1.5
         iconImageView.frame = CGRect(x: (size-imageSize)/2, y: (size-imageSize)/2, width: imageSize, height: imageSize)
-//        iconImageView.center = iconContainer.center
         
         mySwitch.sizeToFit()
         mySwitch.frame = CGRect(
@@ -75,6 +74,7 @@ class SwitchTableViewCell: UITableViewCell {
             width: contentView.frame.size.width - 20 - iconContainer.frame.size.width,
             height: contentView.frame.size.height)
     }
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
