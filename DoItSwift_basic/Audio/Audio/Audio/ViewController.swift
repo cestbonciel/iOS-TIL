@@ -25,7 +25,6 @@ class ViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRecorderDel
 	@IBOutlet weak var btnPause: UIButton!
 	@IBOutlet weak var btnStop: UIButton!
 	@IBOutlet weak var slVolume: UISlider!
-	
 	@IBOutlet weak var buttonRecord: UIButton!
 	@IBOutlet weak var lblRecordTime: UILabel!
 	
@@ -34,6 +33,7 @@ class ViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRecorderDel
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
 		selectAudioFile()
 		if !isRecordMode {
 			initPlay()
