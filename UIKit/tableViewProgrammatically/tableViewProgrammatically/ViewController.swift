@@ -21,8 +21,8 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 		self.setupUI()
 		
-		self.tableView.delegate = self
-		self.tableView.dataSource = self
+		tableView.delegate = self
+		tableView.dataSource = self
 	}
 	// MARK: UI Components
 	private let tableView: UITableView = {

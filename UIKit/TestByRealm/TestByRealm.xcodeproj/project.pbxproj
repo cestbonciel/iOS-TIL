@@ -15,7 +15,7 @@
 		1A4148452B7D40AA00FE9DE3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1A4148442B7D40AA00FE9DE3 /* RealmSwift */; };
 		1AA5AE892B7DE063001CED38 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA5AE882B7DE063001CED38 /* MainTableViewController.swift */; };
 		1AA5AE8B2B7DE2E1001CED38 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA5AE8A2B7DE2E1001CED38 /* Enums.swift */; };
-		1AA5AE8E2B7DE377001CED38 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA5AE8D2B7DE377001CED38 /* Data.swift */; };
+		1AA5AE8E2B7DE377001CED38 /* TodoThingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA5AE8D2B7DE377001CED38 /* TodoThingsData.swift */; };
 		1AA5AE902B7DE495001CED38 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA5AE8F2B7DE495001CED38 /* DataTableViewCell.swift */; };
 		1AA5AE932B7DE4CC001CED38 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA5AE922B7DE4CC001CED38 /* Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -29,7 +29,7 @@
 		1A4148332B7D405F00FE9DE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AA5AE882B7DE063001CED38 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		1AA5AE8A2B7DE2E1001CED38 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		1AA5AE8D2B7DE377001CED38 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		1AA5AE8D2B7DE377001CED38 /* TodoThingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoThingsData.swift; sourceTree = "<group>"; };
 		1AA5AE8F2B7DE495001CED38 /* DataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		1AA5AE922B7DE4CC001CED38 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,7 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				1AA5AE8A2B7DE2E1001CED38 /* Enums.swift */,
-				1AA5AE8D2B7DE377001CED38 /* Data.swift */,
+				1AA5AE8D2B7DE377001CED38 /* TodoThingsData.swift */,
 				1AA5AE922B7DE4CC001CED38 /* Extensions.swift */,
 			);
 			path = Helpers;
@@ -175,7 +175,7 @@
 			files = (
 				1AA5AE892B7DE063001CED38 /* MainTableViewController.swift in Sources */,
 				1AA5AE902B7DE495001CED38 /* DataTableViewCell.swift in Sources */,
-				1AA5AE8E2B7DE377001CED38 /* Data.swift in Sources */,
+				1AA5AE8E2B7DE377001CED38 /* TodoThingsData.swift in Sources */,
 				1AA5AE8B2B7DE2E1001CED38 /* Enums.swift in Sources */,
 				1A4148262B7D405E00FE9DE3 /* AppDelegate.swift in Sources */,
 				1A4148282B7D405E00FE9DE3 /* SceneDelegate.swift in Sources */,

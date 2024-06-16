@@ -16,7 +16,7 @@ class MainTableViewController: UITableViewController {
     private let editBarButton = UIBarButtonItem(image: UIImage(systemName: "pencil"), style: .plain, target: nil, action: nil)
     private let deleteBarButton = UIBarButtonItem(barButtonSystemItem: .trash, target: nil, action: nil)
     
-    private var itemArray: Results<Data>?
+    private var itemArray: Results<TodoThingsData>?
     
     private var isDelete = false
     private var isEdit = false
@@ -37,7 +37,7 @@ class MainTableViewController: UITableViewController {
     }
     
     private func realmGetData() {
-        itemArray = realm.objects(Data.self).sorted(byKeyPath: "name", ascending: true)
+        itemArray = realm.objects(TodoThingsData.self).sorted(byKeyPath: "name", ascending: true)
     }
     
     private var titleTextField = UITextField()
@@ -79,7 +79,7 @@ class MainTableViewController: UITableViewController {
 //        }
 //    }
     
-    private func realmAdd(data: Data) {
+    private func realmAdd(data: TodoThingsData) {
         do {
             try realm.write {
                 realm.add(data)
@@ -105,7 +105,7 @@ class MainTableViewController: UITableViewController {
             guard let safeCategoryTextFieldValue = self.categoryTextField.text else { return }
             if safeCategoryTextFieldValue.isEmpty { self.selectedCategory = Category.uncategorized }
             
-            let newItemData = Data(name: safeTitleTextFieldValue, category: self.selectedCategory)
+            let newItemData = TodoThingsData(name: safeTitleTextFieldValue, category: self.selectedCategory)
 //            self.itemArray.append(newItemData)
             self.realmAdd(data: newItemData)
             self.tableView.reloadData()

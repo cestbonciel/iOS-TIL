@@ -36,7 +36,7 @@ class DataTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var data: Data? {
+    var data: TodoThingsData? {
         didSet {
             nameLabel.text = data?.name
             categoryLabel.text = data?.category
@@ -64,7 +64,7 @@ class DataTableViewCell: UITableViewCell {
     }()
     
     private var checkmarkImage: UIImageView = {
-        let checkmarkImage = UIImage(systemName: "checkmark.diamond.fill")
+        let checkmarkImage = UIImage(systemName: "checkmark.rectangle.fill")
         let imageView = UIImageView(image: checkmarkImage)
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
