@@ -103,9 +103,15 @@ extension ConfigurationAppIntent {
 */
 
 
-struct WeatherWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        WeatherWidgetEntryView(entry: WeatherEntry(date: Date(), city: "London", temperature: 89, description: "Thunder Storm", icon: "cloud.bolt.rain", image: "thunder"))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
-}
+#Preview("Thunder Storm", as: .systemSmall, widget: {
+    WeatherWidget()
+}, timeline: {
+    WeatherEntry(
+        date: Date(),
+        city: "London",
+        temperature: 89,
+        description: "Thunder Storm",
+        icon: "cloud.bolt.rain",
+        image: "thunder"
+    )
+})
