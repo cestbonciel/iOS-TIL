@@ -87,3 +87,7 @@ WifiImageView 하위 뷰는 wifiEnable 상태 프로퍼티에 접근해야한다
 ```Swift
 @Binding var wifiEnable: Bool 
 ```
+
+
+[ 실행할 수 있는 xcode 프로젝트 코드]
+[examObjectOfSwiftUI](/swiftui_grammar/examObjects)
