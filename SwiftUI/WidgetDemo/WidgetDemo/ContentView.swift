@@ -13,8 +13,11 @@ struct WeatherType: Hashable {
 }
 
 struct ContentView: View {
+    
+    @State var path = NavigationPath()
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             List {
                 NavigationLink(value: WeatherType(name: "Hail Storm", icon: "cloud.hail")) {
                     Label("Hail Storm", systemImage: "cloud.hail")
@@ -32,6 +35,19 @@ struct ContentView: View {
                 WeatherDetailView(weather: weather)
             }
             .navigationTitle("Severe Weather")
+            .onOpenURL { url in
+                if (!path.isEmpty) {
+                    path.removeLast(path.count)
+                }
+                
+                if (url == hailUrl) {
+                    path.append(WeatherType(name: "Hail Storm", icon: "cloud.hail"))
+                } else if (url == thunderUrl) {
+                    path.append(WeatherType(name: "Thunder Storm", icon: "cloud.bolt.rain"))
+                } else if (url == tropicalUrl) {
+                    path.append(WeatherType(name: "Tropical Storm", icon: "tropicalstorm"))
+                }
+            }
         }
     }
 }

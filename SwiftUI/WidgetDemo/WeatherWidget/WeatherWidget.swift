@@ -10,11 +10,28 @@ import SwiftUI
 
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> WeatherEntry {
-        WeatherEntry(date: Date(), city: "London", temperature: 89, description: "Thunder Storm", icon: "cloud.bolt.rain", image: "thunder")
+        WeatherEntry(
+            date: Date(),
+            city: "London",
+            temperature: 89,
+            description: "Thunder Storm",
+            icon: "cloud.bolt.rain",
+            image: "thunder",
+            url: thunderUrl
+        )
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> WeatherEntry {
-        londonTimeline[0]
+        let entry = WeatherEntry(
+            date: Date(),
+            city: "London",
+            temperature: 89,
+            description: "Thunder Storm",
+            icon: "cloud.bolt.rain",
+            image: "thunder",
+            url: thunderUrl
+        )
+        return entry
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<WeatherEntry> {
@@ -30,23 +47,29 @@ struct Provider: AppIntentTimelineProvider {
         let timeline = Timeline(entries: entries, policy: .never)
         return timeline
     }
-
-//    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
 }
 
 
 struct WeatherWidgetEntryView : View {
     var entry: Provider.Entry
-
+    
+    @Environment(\.widgetFamily) var widgetFamily
+    
     var body: some View {
         ZStack {
             Color("weatherBackgroundColor")
-            WeatherSubView(entry: entry)
+            
+            HStack {
+                WeatherSubView(entry: entry)
+                if widgetFamily == .systemMedium {
+                    Image(entry.image)
+                        .resizable()
+                }
+            }
                 
         }
-        .containerBackground(.fill.tertiary, for: .widget)
+        //.containerBackground(.fill.tertiary, for: .widget)
+        .widgetURL(entry.url)
     }
 }
 
@@ -78,10 +101,17 @@ struct WeatherWidget: Widget {
     let kind: String = "WeatherWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
+        AppIntentConfiguration(
+            kind: kind,
+            intent: ConfigurationAppIntent.self,
+            provider: Provider()
+        ) { entry in
             WeatherWidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
+        .configurationDisplayName("My Weather Widget")
+        .description("A demo Weather Widget")
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
@@ -103,15 +133,56 @@ extension ConfigurationAppIntent {
 */
 
 
-#Preview("Thunder Storm", as: .systemSmall, widget: {
+#Preview(
+"Thunder Storm",
+ as: .systemSmall,
+ widget: {
     WeatherWidget()
-}, timeline: {
+},
+ timeline: {
     WeatherEntry(
         date: Date(),
         city: "London",
         temperature: 89,
         description: "Thunder Storm",
         icon: "cloud.bolt.rain",
-        image: "thunder"
+        image: "thunder", url: thunderUrl
     )
 })
+
+#Preview(
+  "Medium 크기",
+  as: .systemMedium,
+  widget: {
+    WeatherWidget()
+  },
+  timeline: {
+    WeatherEntry(
+      date: Date(),
+      city: "London",
+      temperature: 89,
+      description: "Thunder Storm",
+      icon: "cloud.bolt.rain.fill",
+      image: "thunder", url: thunderUrl
+    )
+  }
+)
+
+#Preview(
+  "Large 크기",
+  as: .systemLarge,
+  widget: {
+    WeatherWidget()
+  },
+  timeline: {
+    WeatherEntry(
+      date: Date(),
+      city: "London",
+      temperature: 89,
+      description: "Thunder Storm",
+      icon: "cloud.bolt.rain.fill",
+      image: "thunder", url: thunderUrl
+    )
+  }
+)
+
