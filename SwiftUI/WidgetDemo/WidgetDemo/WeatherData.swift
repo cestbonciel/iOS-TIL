@@ -15,7 +15,12 @@ struct WeatherEntry: TimelineEntry {
     let description: String
     let icon: String
     let image: String
+    let url: URL?
 }
+
+let hailUrl = URL(string: "weatherwidget://hail")
+let thunderUrl = URL(string: "weatherwidget://thunder")
+let tropicalUrl = URL(string: "weatherwidget://tropical")
 
 let londonTimeline = [
     WeatherEntry(
@@ -24,7 +29,7 @@ let londonTimeline = [
         temperature: 87,
         description: "Hail Storm",
         icon: "cloud.hail",
-        image: "hail"
+        image: "hail", url: hailUrl
     ),
     WeatherEntry(
         date: Date(),
@@ -32,7 +37,7 @@ let londonTimeline = [
         temperature: 92,
         description: "Thunder Storm",
         icon: "cloud.bolt.rain",
-        image: "thunder"
+        image: "thunder", url: thunderUrl
     ),
     WeatherEntry(
         date: Date(),
@@ -40,7 +45,7 @@ let londonTimeline = [
         temperature: 95,
         description: "Hail Storm",
         icon: "cloud.hail",
-        image: "hail"
+        image: "hail", url: hailUrl
     )
 ]
 
@@ -51,7 +56,7 @@ let miamiTimeline = [
         temperature: 81,
         description: "Thunder Storm",
         icon: "cloud.bolt.rain",
-        image: "thunder"
+        image: "thunder", url: thunderUrl
     ),
     WeatherEntry(
         date: Date(),
@@ -59,7 +64,7 @@ let miamiTimeline = [
         temperature: 74,
         description: "Tropical Storm",
         icon: "tropicalstorm",
-        image: "tropical"
+        image: "tropical", url: tropicalUrl
     ),
     WeatherEntry(
         date: Date(),
@@ -67,6 +72,22 @@ let miamiTimeline = [
         temperature: 72,
         description: "Thunder Storm",
         icon: "cloud.bolt.rain",
-        image: "thunder"
+        image: "thunder", url: thunderUrl
     )
 ]
+
+struct LocationData: Identifiable {
+    let city: String
+    let timeline: [WeatherEntry]
+    
+    var id: String {
+        city
+    }
+    
+    static let london = LocationData(city: "London", timeline: londonTimeline)
+    static let miami = LocationData(city: "miami", timeline: miamiTimeline)
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(city)
+    }
+}
