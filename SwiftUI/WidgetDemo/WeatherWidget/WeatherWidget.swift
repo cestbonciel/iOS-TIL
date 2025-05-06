@@ -39,11 +39,20 @@ struct Provider: AppIntentTimelineProvider {
 
 struct WeatherWidgetEntryView : View {
     var entry: Provider.Entry
-
+    
+    @Environment(\.widgetFamily) var widgetFamily
+    
     var body: some View {
         ZStack {
             Color("weatherBackgroundColor")
-            WeatherSubView(entry: entry)
+            
+            HStack {
+                WeatherSubView(entry: entry)
+                if widgetFamily == .systemMedium {
+                    Image(entry.image)
+                        .resizable()
+                }
+            }
                 
         }
         .containerBackground(.fill.tertiary, for: .widget)
@@ -78,10 +87,17 @@ struct WeatherWidget: Widget {
     let kind: String = "WeatherWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
+        AppIntentConfiguration(
+            kind: kind,
+            intent: ConfigurationAppIntent.self,
+            provider: Provider()
+        ) { entry in
             WeatherWidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
+        .configurationDisplayName("My Weather Widget")
+        .description("A demo Weather Widget")
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
@@ -103,9 +119,13 @@ extension ConfigurationAppIntent {
 */
 
 
-#Preview("Thunder Storm", as: .systemSmall, widget: {
+#Preview(
+"Thunder Storm",
+ as: .systemSmall,
+ widget: {
     WeatherWidget()
-}, timeline: {
+},
+ timeline: {
     WeatherEntry(
         date: Date(),
         city: "London",
@@ -115,3 +135,40 @@ extension ConfigurationAppIntent {
         image: "thunder"
     )
 })
+
+#Preview(
+  "Medium 크기",
+  as: .systemMedium,
+  widget: {
+    WeatherWidget()
+  },
+  timeline: {
+    WeatherEntry(
+      date: Date(),
+      city: "London",
+      temperature: 89,
+      description: "Thunder Storm",
+      icon: "cloud.bolt.rain.fill",
+      image: "thunder"
+    )
+  }
+)
+
+#Preview(
+  "Large 크기",
+  as: .systemLarge,
+  widget: {
+    WeatherWidget()
+  },
+  timeline: {
+    WeatherEntry(
+      date: Date(),
+      city: "London",
+      temperature: 89,
+      description: "Thunder Storm",
+      icon: "cloud.bolt.rain.fill",
+      image: "thunder"
+    )
+  }
+)
+
