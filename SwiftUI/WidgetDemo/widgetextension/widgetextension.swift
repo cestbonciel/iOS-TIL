@@ -54,33 +54,42 @@ struct widgetextensionEntryView : View {
 	let data = DataService()
 	
 	var body: some View {
-		ZStack {
-			Circle()
-				.stroke(.white.opacity(0.1), lineWidth: 20)
-			
-			let pct = Double(data.progress())/50.0
-			
-			Circle()
-				.trim(from: 0, to: pct)
-				.stroke(
-					.pink,
-					style: StrokeStyle(
-						lineWidth: 20,
-						lineCap: .round,
-						lineJoin: .round
+		VStack {
+			ZStack {
+				Circle()
+					.stroke(.white.opacity(0.1), lineWidth: 15)
+				
+				let pct = Double(data.progress())/50.0
+				
+				Circle()
+					.trim(from: 0, to: pct)
+					.stroke(
+						.blue.opacity(1),
+						style: StrokeStyle(
+							lineWidth: 15,
+							lineCap: .round,
+							lineJoin: .round
+						)
 					)
-				)
-				.rotationEffect(.degrees(-90))
-			VStack {
-				Text(String(data.progress()))
-					.font(.title)
-					.bold()
+					.rotationEffect(.degrees(-90))
+				
+				VStack {
+					Text(String(data.progress()))
+						.font(.title)
+						.contentTransition(.numericText())
+				}
+				.foregroundStyle(.white)
+				.fontDesign(.rounded)
+				
+				
 			}
-			.foregroundStyle(.white)
-			.fontDesign(.rounded)
+			Button(intent: LogEntry()) {
+				Text("+1")
+					.padding(.horizontal)
+			}
 			
 		}
-		.padding()
+		
 		.containerBackground(.black, for: .widget)
 	}
 }
