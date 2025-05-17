@@ -10,28 +10,11 @@ import SwiftUI
 
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> WeatherEntry {
-        WeatherEntry(
-            date: Date(),
-            city: "London",
-            temperature: 89,
-            description: "Thunder Storm",
-            icon: "cloud.bolt.rain",
-            image: "thunder",
-            url: thunderUrl
-        )
+        WeatherEntry(date: Date(), city: "London", temperature: 89, description: "Thunder Storm", icon: "cloud.bolt.rain", image: "thunder")
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> WeatherEntry {
-        let entry = WeatherEntry(
-            date: Date(),
-            city: "London",
-            temperature: 89,
-            description: "Thunder Storm",
-            icon: "cloud.bolt.rain",
-            image: "thunder",
-            url: thunderUrl
-        )
-        return entry
+        londonTimeline[0]
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<WeatherEntry> {
@@ -47,6 +30,10 @@ struct Provider: AppIntentTimelineProvider {
         let timeline = Timeline(entries: entries, policy: .never)
         return timeline
     }
+
+//    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
+//        // Generate a list containing the contexts this widget is relevant in.
+//    }
 }
 
 
@@ -68,8 +55,7 @@ struct WeatherWidgetEntryView : View {
             }
                 
         }
-        //.containerBackground(.fill.tertiary, for: .widget)
-        .widgetURL(entry.url)
+        .containerBackground(.fill.tertiary, for: .widget)
     }
 }
 
@@ -146,7 +132,7 @@ extension ConfigurationAppIntent {
         temperature: 89,
         description: "Thunder Storm",
         icon: "cloud.bolt.rain",
-        image: "thunder", url: thunderUrl
+        image: "thunder"
     )
 })
 
@@ -163,7 +149,7 @@ extension ConfigurationAppIntent {
       temperature: 89,
       description: "Thunder Storm",
       icon: "cloud.bolt.rain.fill",
-      image: "thunder", url: thunderUrl
+      image: "thunder"
     )
   }
 )
@@ -181,7 +167,7 @@ extension ConfigurationAppIntent {
       temperature: 89,
       description: "Thunder Storm",
       icon: "cloud.bolt.rain.fill",
-      image: "thunder", url: thunderUrl
+      image: "thunder"
     )
   }
 )
