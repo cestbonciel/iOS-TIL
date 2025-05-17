@@ -2,56 +2,84 @@
 //  ContentView.swift
 //  WidgetDemo
 //
-//  Created by Nat Kim on 4/4/25.
+//  Created by Nat Kim on 5/18/25.
 //
 
 import SwiftUI
+import WidgetKit
 
-struct WeatherType: Hashable {
-    var name: String
-    var icon: String
-}
+struct ContentView: View { 
+	@AppStorage("streak", store: UserDefaults(suiteName: "group.com.seohyunKim.iOS.WidgetDemo")) var streak = 0
+	
+	var body: some View {
+		
+		ZStack {
+			Color.black
+				.ignoresSafeArea()
+			
+			VStack {
+				
+				Spacer()
+				
+				ZStack {
+					Circle()
+						.stroke(.white.opacity(0.1), lineWidth: 20)
+					
+					let pct = Double(streak)/50.0
+					
+					Circle()
+						.trim(from: 0, to: pct)
+						.stroke(
+							.blue,
+							style: StrokeStyle(
+								lineWidth: 20,
+								lineCap: .round,
+								lineJoin: .round
+							)
+						)
+						.rotationEffect(.degrees(-90))
+					VStack {
+						Text("Streak")
+							.font(.largeTitle)
+						Text(String(streak))
+							.font(.system(size: 70))
+							.bold()
+					}
+					.foregroundStyle(.white)
+					.fontDesign(.rounded)
+					
+				}
+				.padding(.horizontal, 50)
+				
+				Spacer()
+				
+				Button {
+					streak += 1
+					
+					// 수동으로 위젯 리로드
+					WidgetCenter.shared.reloadTimelines(ofKind: "widgetextension")
+				} label: {
+					ZStack {
+						RoundedRectangle(cornerRadius: 20)
+							.foregroundStyle(.blue)
+							.frame(height: 50)
+						Text("+1")
+							.foregroundStyle(.white)
+					}
+				}
+				.padding(.horizontal)
+				
+				
 
-struct ContentView: View {
-    
-    @State var path = NavigationPath()
-    
-    var body: some View {
-        NavigationStack(path: $path) {
-            List {
-                NavigationLink(value: WeatherType(name: "Hail Storm", icon: "cloud.hail")) {
-                    Label("Hail Storm", systemImage: "cloud.hail")
-                }
-                
-                NavigationLink(value: WeatherType(name: "Thunder Storm", icon: "cloud.bolt.rain")) {
-                    Label("Thunder Storm", systemImage: "cloud.bolt.rain")
-                }
-                
-                NavigationLink(value: WeatherType(name: "Tropical Storm", icon: "tropicalstorm")) {
-                    Label("Tropical Storm", systemImage: "tropicalstorm")
-                }
-            }
-            .navigationDestination(for: WeatherType.self) { weather in
-                WeatherDetailView(weather: weather)
-            }
-            .navigationTitle("Severe Weather")
-            .onOpenURL { url in
-                if (!path.isEmpty) {
-                    path.removeLast(path.count)
-                }
-                
-                if (url == hailUrl) {
-                    path.append(WeatherType(name: "Hail Storm", icon: "cloud.hail"))
-                } else if (url == thunderUrl) {
-                    path.append(WeatherType(name: "Thunder Storm", icon: "cloud.bolt.rain"))
-                } else if (url == tropicalUrl) {
-                    path.append(WeatherType(name: "Tropical Storm", icon: "tropicalstorm"))
-                }
-            }
-        }
-    }
+			}
+			
+			
+		}
+		
+		
+	}
 }
 
 #Preview {
-    ContentView()
+	ContentView()
 }
