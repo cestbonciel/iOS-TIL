@@ -68,6 +68,11 @@
 			path = widgetextension;
 			sourceTree = "<group>";
 		};
+		1A6189152DDA07900018408C /* Documentation */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Documentation;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +98,7 @@
 		1A6188C62DD91D100018408C = {
 			isa = PBXGroup;
 			children = (
+				1A6189152DDA07900018408C /* Documentation */,
 				1A6189092DD91DE20018408C /* widgetextensionExtension.entitlements */,
 				1A6188D12DD91D100018408C /* WidgetDemo */,
 				1A6188F82DD91DA50018408C /* widgetextension */,
@@ -138,6 +144,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				1A6188D12DD91D100018408C /* WidgetDemo */,
+				1A6189152DDA07900018408C /* Documentation */,
 			);
 			name = WidgetDemo;
 			packageProductDependencies = (
