@@ -31,6 +31,8 @@ https://developer.apple.com/documentation/widgetkit/appintentconfiguration
 
 시스템적 버그 메시지지만, 실상 디바이스상에서 위젯을 설치해 테스트해보는 것에는 이상이 없다.
 
-아래는 실제 구동되는 테스트 화면이다 
+아래는 실제 구동되는 테스트 화면이다. 앱 화면에서 바뀌는 숫자를 바로 
+위젯에서도 적용이 되는 것을 볼 수 있으며 위젯상에서 숫자를 목표치에 
+도달하면 멈추는 UI를 확인할 수 있다.
 
 ![위젯 설정 데모](Images/widgetConfigTry02.gif)
