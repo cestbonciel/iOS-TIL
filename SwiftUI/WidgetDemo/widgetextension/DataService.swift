@@ -19,10 +19,20 @@ struct DataService {
 	private var streak = 0
 	
 	func log() {
-		streak += 1
+		//streak += 1
+		let configIntent = StreakConfigIntent()
+		let targetStreak = configIntent.targetStreak
+		
+		if streak < targetStreak {
+			streak += 1
+		}
 	}
 	
 	func progress() -> Int {
 		return streak
+	}
+	
+	func isGoalReached(target: Int) -> Bool {
+		return streak >= target
 	}
 }
