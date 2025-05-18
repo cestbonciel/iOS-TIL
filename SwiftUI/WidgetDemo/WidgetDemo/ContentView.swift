@@ -19,6 +19,26 @@ struct ContentView: View {
 			
 			VStack {
 				
+				HStack {
+					//Spacer()
+					Button {
+						streak = 0
+						WidgetCenter.shared.reloadTimelines(ofKind: "widgetextension")
+					} label: {
+						ZStack {
+							RoundedRectangle(cornerRadius: 20)
+								.foregroundStyle(.red)
+								.frame(height: 50)
+							Text("RESET")
+								.foregroundStyle(.white)
+						}
+					}
+					.frame(width: UIScreen.main.bounds.width / 2.5)
+					
+				}
+				.padding(.horizontal)
+				.padding(.top, 10)
+
 				Spacer()
 				
 				ZStack {

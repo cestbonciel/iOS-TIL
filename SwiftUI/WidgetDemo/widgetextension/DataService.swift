@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import WidgetKit
 
 struct DataService {
 	
@@ -17,13 +18,22 @@ struct DataService {
 		)
 	)
 	private var streak = 0
+
+	@AppStorage("targetStreak", store: UserDefaults(suiteName: "group.com.seohyunKim.iOS.WidgetDemo"))
+	private var savedTargetStreak = 50
+
+	@AppStorage("progressColor", store: UserDefaults(suiteName: "group.com.seohyunKim.iOS.WidgetDemo"))
+	private var savedProgressColor = "blue"
 	
 	func log() {
 		//streak += 1
 		let configIntent = StreakConfigIntent()
-		let targetStreak = configIntent.targetStreak
+		//let targetStreak = configIntent.targetStreak
 		
-		if streak < targetStreak {
+//		if streak < targetStreak {
+//			streak += 1
+//		}
+		if !isGoalReached(target: configIntent.targetStreak) {
 			streak += 1
 		}
 	}
@@ -34,5 +44,15 @@ struct DataService {
 	
 	func isGoalReached(target: Int) -> Bool {
 		return streak >= target
+	}
+	
+	func reset() {
+		streak = 0
+	}
+	
+	func saveWidgetConfig(target: Int, color: String) {
+		savedTargetStreak = target
+		savedProgressColor = color
+		WidgetCenter.shared.reloadTimelines(ofKind: "widgetextension")
 	}
 }
