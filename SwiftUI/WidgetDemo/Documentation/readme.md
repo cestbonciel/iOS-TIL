@@ -36,3 +36,9 @@ https://developer.apple.com/documentation/widgetkit/appintentconfiguration
 도달하면 멈추는 UI를 확인할 수 있다.
 
 ![위젯 설정 데모](Images/widgetConfigTry02.gif)
+
+### 위젯 업데이트
+1. 사용자가 목표달성시 목표 완료라는 문구와 버튼 비활성화
+2. 리셋버튼 추가
+
+![WidgetKit - medium Size](Images/widgetConfigUpdated.gif) 
