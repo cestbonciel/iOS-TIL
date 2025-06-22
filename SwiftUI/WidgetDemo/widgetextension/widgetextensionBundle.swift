@@ -9,8 +9,8 @@ import WidgetKit
 import SwiftUI
 
 @main
-struct widgetextensionBundle: WidgetBundle {
+struct WidgetextensionBundle: WidgetBundle {
     var body: some Widget {
-        widgetextension()
+        Widgetextension()
     }
 }
