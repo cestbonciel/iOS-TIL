@@ -118,6 +118,18 @@ iOSInjectionProject/
 *.p8
 AuthKey_*.p8
 Server/AuthKey_*.p8
+*.p12
+*.cer
+*.mobileprovision
+
+# Entitlements (contains sensitive info)
+*.entitlements
+
+# Provisioning profiles
+*.provisionprofile
+
+# Xcode signing
+**/ExportOptions.plist
 
 # 환경 변수
 .env
