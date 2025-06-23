@@ -17,7 +17,7 @@ class CoffeeDataManager: ObservableObject {
 	private let entriesKey = "coffeeEntries"
 	
 	   init() {
-		   self.userDefaults = UserDefaults(suiteName: "group.com.seohyunKim.iOS.CoffeePushWidget") ?? UserDefaults.standard
+		   self.userDefaults = UserDefaults(suiteName: "group.com.seohyunKim.iOS.CoffeePushWidget2025") ?? UserDefaults.standard
 		   loadEntries()
 		   updateTodayData()
 	   }
