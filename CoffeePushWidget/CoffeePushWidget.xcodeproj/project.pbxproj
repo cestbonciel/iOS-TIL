@@ -44,14 +44,45 @@
 		1A4A86622E08D2950086A588 /* widgetextensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetextensionExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1A4A863E2E08CC3B0086A588 /* Exceptions for "widgetextension" folder in "widgetextensionExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1A4A862C2E08CC3A0086A588 /* widgetextensionExtension */;
+		};
+		1A4A86F72E09C3E50086A588 /* Exceptions for "CoffeePushWidget" folder in "widgetextensionExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SharedModel.swift,
+			);
+			target = 1A4A862C2E08CC3A0086A588 /* widgetextensionExtension */;
+		};
+		1A4A86FB2E09D4660086A588 /* Exceptions for "CoffeePushWidget" folder in "CoffeePushWidget" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1A4A86162E08C4020086A588 /* CoffeePushWidget */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1A4A86192E08C4020086A588 /* CoffeePushWidget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1A4A86FB2E09D4660086A588 /* Exceptions for "CoffeePushWidget" folder in "CoffeePushWidget" target */,
+				1A4A86F72E09C3E50086A588 /* Exceptions for "CoffeePushWidget" folder in "widgetextensionExtension" target */,
+			);
 			path = CoffeePushWidget;
 			sourceTree = "<group>";
 		};
 		1A4A86332E08CC3A0086A588 /* widgetextension */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1A4A863E2E08CC3B0086A588 /* Exceptions for "widgetextension" folder in "widgetextensionExtension" target */,
+			);
 			path = widgetextension;
 			sourceTree = "<group>";
 		};
