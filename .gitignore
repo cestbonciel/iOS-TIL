@@ -114,4 +114,19 @@ iOSInjectionProject/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+# APNs Keys 
+*.p8
+AuthKey_*.p8
+Server/AuthKey_*.p8
+
+# 환경 변수
+.env
+Server/.env
+
+# Node.js 런타임 파일
+Server/node_modules/
+Server/tokens.json
+Server/npm-debug.log*
+
+
 # End of https://www.toptal.com/developers/gitignore/api/swift,firebase,xcode
