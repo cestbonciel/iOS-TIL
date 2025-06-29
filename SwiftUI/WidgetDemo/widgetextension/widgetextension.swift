@@ -268,7 +268,7 @@ struct widgetextensionEntryView : View {
 
 
 
-struct widgetextension: Widget {
+struct Widgetextension: Widget {
 	/// identifier
 	let kind: String = "widgetextension"
 	
@@ -297,7 +297,7 @@ struct widgetextension: Widget {
 	}
 }
 #Preview(as: .systemSmall) {
-	widgetextension()
+	Widgetextension()
 } timeline: {
 	SimpleEntry(date: .now, streak: 1, configuration: StreakConfigIntent())
 	SimpleEntry(date: .now, streak: 4, configuration: StreakConfigIntent())
