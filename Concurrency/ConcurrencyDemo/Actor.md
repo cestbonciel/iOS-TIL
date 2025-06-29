@@ -73,4 +73,4 @@ ConcurrencyDemo/
 
 ### 결과화면
 
-/ConcurrencyDemo/resultsConcurrency.gif
+<img src="./resultsConcurrency.gif" alt="Swift Concurrency Demo 실행 결과" width="300">
