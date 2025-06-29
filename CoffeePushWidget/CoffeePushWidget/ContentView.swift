@@ -11,7 +11,9 @@ import WidgetKit
 struct ContentView: View {
 	@StateObject private var dataManager = CoffeeDataManager()
 	@StateObject private var networkManager = NetworkManager()
+	@EnvironmentObject private var pushManager: PushNotificationManager
 	@State private var showingAddCoffee = false
+	@State private var showingPushSettings = false
 	@State private var newCoffeeName = ""
 	@State private var newCoffeeCaffeine = "125"
 	
@@ -80,14 +82,120 @@ struct ContentView: View {
 				
 				Spacer()
 				
-				// 위젯 업데이트 상태
-				HStack {
-					Circle()
-						.fill(.green)
-						.frame(width: 8, height: 8)
-					Text("위젯 동기화 활성")
+				// 스마트 알림 버튼
+				VStack(spacing: 12) {
+					Button {
+						Task {
+							await sendSmartCaffeineAlert()
+						}
+					} label: {
+						HStack {
+							Image(systemName: "brain.head.profile")
+							Text("스마트 카페인 알림")
+						}
+						.frame(maxWidth: .infinity)
+						.padding()
+						.background(Color.blue)
+						.foregroundColor(.white)
+						.cornerRadius(10)
+					}
+					
+					Button {
+						Task {
+							await sendSleepHealthAlert()
+						}
+					} label: {
+						HStack {
+							Image(systemName: "moon.stars")
+							Text("수면 건강 알림")
+						}
+						.frame(maxWidth: .infinity)
+						.padding()
+						.background(Color.purple)
+						.foregroundColor(.white)
+						.cornerRadius(10)
+					}
+					.disabled(pushManager.deviceToken == nil)
+				}
+				// 푸시 알림 테스트 버튼
+				/*	VStack(spacing: 12) {
+				 Button {
+				 Task {
+				 await pushManager.scheduleTestNotification()
+				 }
+				 } label: {
+				 HStack {
+				 Image(systemName: "bell.badge")
+				 Text("로컬 알림 테스트")
+				 }
+				 .frame(maxWidth: .infinity)
+				 .padding()
+				 .background(Color.orange)
+				 .foregroundColor(.white)
+				 .cornerRadius(10)
+				 }
+				 
+				 Button {
+				 Task {
+				 await pushManager.sendPushNotification(
+				 title: "☕ Supabase Push Test",
+				 body: "Your coffee notification via Supabase!",
+				 customData: ["source": "supabase", "coffeeType": "test"]
+				 )
+				 }
+				 } label: {
+				 HStack {
+				 Image(systemName: "cloud.bolt")
+				 Text("Supabase 푸시 테스트")
+				 }
+				 .frame(maxWidth: .infinity)
+				 .padding()
+				 .background(Color.purple)
+				 .foregroundColor(.white)
+				 .cornerRadius(10)
+				 }
+				 .disabled(pushManager.deviceToken == nil)
+				 } */
+				
+				// 푸시 알림 & 위젯 상태
+				VStack(spacing: 8) {
+					HStack {
+						Circle()
+							.fill(pushManager.notificationPermissionStatus == .authorized ? .green : .orange)
+							.frame(width: 8, height: 8)
+						Text("푸시 알림: \(pushManager.notificationPermissionStatus.description)")
+							.font(.caption)
+							.foregroundColor(.secondary)
+						
+						Spacer()
+						
+						Button("권한 요청") {
+							Task {
+								await pushManager.requestNotificationPermission()
+							}
+						}
 						.font(.caption)
-						.foregroundColor(.secondary)
+						.buttonStyle(.borderedProminent)
+						.controlSize(.mini)
+					}
+					
+					HStack {
+						Circle()
+							.fill(pushManager.deviceToken != nil ? .green : .orange)
+							.frame(width: 8, height: 8)
+						Text("Device Token: \(pushManager.deviceToken != nil ? "등록됨" : "등록 중...")")
+							.font(.caption)
+							.foregroundColor(.secondary)
+					}
+					
+					HStack {
+						Circle()
+							.fill(.green)
+							.frame(width: 8, height: 8)
+						Text("위젯 동기화 활성")
+							.font(.caption)
+							.foregroundColor(.secondary)
+					}
 				}
 			}
 			.padding()
@@ -199,6 +307,10 @@ struct ContentView: View {
 		
 		dataManager.addEntry(entry)
 		
+		Task {
+			await checkAndSendSmartNotification()
+		}
+		
 		// 현재 사용 가능한 위젯 업데이트 방법
 		WidgetCenter.shared.reloadAllTimelines()
 		
@@ -209,6 +321,28 @@ struct ContentView: View {
 	private func resetForm() {
 		newCoffeeName = ""
 		newCoffeeCaffeine = "125"
+	}
+	
+	private func sendSmartCaffeineAlert() async {
+		let currentCaffeine = dataManager.todayTotalCaffeine
+		await pushManager.sendSmartCaffeineNotification(currentCaffeine: currentCaffeine)
+	}
+	
+	private func sendSleepHealthAlert() async {
+		let currentCaffeine = dataManager.todayTotalCaffeine
+		let hour = Calendar.current.component(.hour, from: Date())
+		await pushManager.sendSleepHealthNotification(currentCaffeine: currentCaffeine, hour: hour)
+	}
+	
+	private func checkAndSendSmartNotification() async {
+		let currentCaffeine = dataManager.todayTotalCaffeine
+		let hour = Calendar.current.component(.hour, from: Date())
+		
+		if currentCaffeine >= 400 {
+			await pushManager.sendSmartCaffeineNotification(currentCaffeine: currentCaffeine)
+		} else if currentCaffeine >= 320 && hour >= 16 {
+			await pushManager.sendSleepHealthNotification(currentCaffeine: currentCaffeine, hour: hour)
+		}
 	}
 }
 
