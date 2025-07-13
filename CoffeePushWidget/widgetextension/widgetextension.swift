@@ -173,59 +173,6 @@ struct SmallWidgetView: View {
 	}
 }
 
-struct MediumWidgetView: View {
-	let entry: CoffeeEntry
-	
-	var body: some View {
-		HStack(spacing: 16) {
-			// 왼쪽: 카페인 총량
-			VStack(spacing: 4) {
-				Text("오늘 카페인")
-					.font(.caption)
-					.foregroundColor(.secondary)
-				Text("\(entry.totalCaffeine)")
-					.font(.largeTitle)
-					.fontWeight(.bold)
-					.foregroundColor(.primary)
-				Text("mg")
-					.font(.caption)
-					.foregroundColor(.secondary)
-			}
-			.frame(maxWidth: .infinity)
-			
-			Divider()
-			
-			// 오른쪽: 최근 기록
-			VStack(alignment: .leading, spacing: 4) {
-				Text("최근 기록")
-					.font(.caption)
-					.foregroundColor(.secondary)
-					.frame(maxWidth: .infinity, alignment: .leading)
-				
-				if entry.recentEntries.isEmpty {
-					Text("아직 기록이 없습니다")
-						.font(.caption2)
-						.foregroundColor(.secondary)
-						.frame(maxWidth: .infinity, alignment: .center)
-				} else {
-					ForEach(Array(entry.recentEntries.enumerated()), id: \.offset) { index, record in
-						HStack {
-							Text(record.name)
-								.font(.caption2)
-								.lineLimit(1)
-							Spacer()
-							Text("\(record.caffeine)mg")
-								.font(.caption2)
-								.foregroundColor(.secondary)
-						}
-					}
-				}
-			}
-			.frame(maxWidth: .infinity)
-		}
-		.padding()
-	}
-}
 
 
 struct widgetextension: Widget {

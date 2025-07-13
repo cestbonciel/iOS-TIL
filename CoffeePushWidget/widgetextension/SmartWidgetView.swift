@@ -6,118 +6,95 @@
 //
 
 import SwiftUI
-
-// MARK: - Smart Widget View (새로 추가)
-
 struct SmartWidgetView: View {
 	let entry: CoffeeEntry
 	
 	var body: some View {
-		VStack(spacing: 6) {
-			// 🎨 상단: 건강 상태 + 시간별 메시지
+		VStack(spacing: 8) {
 			HStack {
-				if let status = entry.healthStatus {
-					Image(systemName: status.symbolName)
-						.foregroundColor(status.color)
-						.font(.title2)
-				} else {
-					Image(systemName: "cup.and.saucer")
-						.foregroundColor(.gray)
-						.font(.title2)
-				}
-				
-				VStack(alignment: .leading, spacing: 2) {
-					Text(contextualMessage)
-						.font(.caption2)
-						.fontWeight(.medium)
-						.foregroundColor(entry.healthStatus?.color ?? .gray)
-					
-					Text("오늘 \(entry.totalCaffeine)mg")
-						.font(.title3)
-						.fontWeight(.bold)
-				}
+				Text(contextualMessage)
+					.font(.caption)
+					.fontWeight(.medium)
+					.foregroundColor(entry.healthStatus?.color ?? .gray)
+					.lineLimit(1)
 				
 				Spacer()
 			}
 			
-			// 중간: 진행률 바 (시각적 개선)
-			ProgressView(value: min(Double(entry.totalCaffeine) / 400.0, 1.0))
-				.tint(entry.healthStatus?.color ?? .gray)
-				.scaleEffect(y: 2)
+			VStack(spacing: 4) {
+				Text("\(entry.totalCaffeine)mg")
+					.font(.system(size: 36, weight: .bold, design: .rounded))
+					.foregroundColor(.primary)
+					.minimumScaleFactor(0.8)
+				
+				let percentage = min(Double(entry.totalCaffeine) / 400.0, 1.0)
+				let progressColor = getProgressColor(percentage: percentage)
+				
+				ProgressView(value: percentage)
+					.tint(progressColor)
+					.scaleEffect(y: 2)
+					.animation(.easeInOut(duration: 0.3), value: percentage)
+			}
 			
-			// 하단: 마지막 커피 + 액션 힌트
+			Spacer()
+			
 			if let lastCoffee = entry.lastCoffee {
 				HStack {
-					VStack(alignment: .leading, spacing: 1) {
+					VStack(alignment: .leading, spacing: 2) {
 						Text(lastCoffee.name)
-							.font(.caption2)
+							.font(.caption)
+							.fontWeight(.medium)
 							.lineLimit(1)
+							.fixedSize(horizontal: false, vertical: true) // 말줄임표 방지
 						Text(timeAgoString(from: lastCoffee.timestamp))
 							.font(.caption2)
 							.foregroundColor(.secondary)
 					}
 					
 					Spacer()
-					
-					Text(actionHint)
-						.font(.caption2)
-						.foregroundColor(.blue)
 				}
 			} else {
-				Text("☕ 탭하여 커피 추가")
-					.font(.caption2)
-					.foregroundColor(.blue)
-					.frame(maxWidth: .infinity)
+				HStack {
+					Text("탭하여 커피 추가")
+						.font(.caption)
+						.fontWeight(.medium)
+						.foregroundColor(.blue)
+						.lineLimit(1)
+					
+					Spacer()
+				}
 			}
 		}
-		.padding(8)
-		.widgetURL(createSmartDeepLink()) // 🔗 스마트 딥링크
+		.padding(10)
+		.background(
+			RoundedRectangle(cornerRadius: 12)
+				.fill(Color(.systemGray6))
+				.shadow(color: .black.opacity(0.1), radius: 1, x: 0, y: 1)
+		)
+		.widgetURL(URL(string: "coffeepushwidget://add-coffee")) // 단순히 앱 열기
 	}
 	
-	// 🧠 시간과 카페인 수준에 따른 맞춤 메시지
+	private func getProgressColor(percentage: Double) -> Color {
+		switch percentage {
+		case 0..<0.25: return .blue
+		case 0.25..<0.5: return .green
+		case 0.5..<0.75: return .orange
+		case 0.75..<1.0: return .red
+		default: return .purple
+		}
+	}
+	
 	private var contextualMessage: String {
 		let hour = Calendar.current.component(.hour, from: Date())
 		let caffeine = entry.totalCaffeine
 		
 		switch (caffeine, hour) {
-		case (400..., _): return "⛔ 한도 초과!"
+		case (400..., _): return "⛔ 한도 초과"
 		case (300..., 18...23): return "🌙 수면 주의"
 		case (200..., 7...9): return "🌅 좋은 아침"
-		case (100..., 13...15): return "☕ 오후 충전"
+		case (100..., 13...15): return "☕ 오후 시간"
 		case (0..<100, 20...23): return "😴 좋은 밤"
 		default: return "☕ 커피 타임"
-		}
-	}
-	
-	// 💡 다음 액션 힌트
-	private var actionHint: String {
-		let hour = Calendar.current.component(.hour, from: Date())
-		let caffeine = entry.totalCaffeine
-		
-		switch (caffeine, hour) {
-		case (400..., _): return "💧 물"
-		case (300..., 16...): return "🚫 중단"
-		case (0..<200, 7...11): return "➕ 추가"
-		case (0..<200, 13...15): return "☕ 오후"
-		default: return "📊 확인"
-		}
-	}
-	
-	// 🔗 스마트 딥링크 생성
-	private func createSmartDeepLink() -> URL? {
-		let hour = Calendar.current.component(.hour, from: Date())
-		let caffeine = entry.totalCaffeine
-		
-		// 상황별 딥링크
-		switch (caffeine, hour) {
-		case (400..., _):
-			return URL(string: "coffeepushwidget://hydration-alert")
-		case (0..<200, 7...11):
-			return URL(string: "coffeepushwidget://morning-coffee")
-		case (0..<200, 13...15):
-			return URL(string: "coffeepushwidget://afternoon-coffee")
-		default:
-			return URL(string: "coffeepushwidget://add-coffee")
 		}
 	}
 	
@@ -126,8 +103,8 @@ struct SmartWidgetView: View {
 		let hours = interval / 3600
 		let minutes = (interval % 3600) / 60
 		
-		if hours > 0 { return "\(hours)h" }
-		else if minutes > 0 { return "\(minutes)m" }
-		else { return "now" }
+		if hours > 0 { return "\(hours)시간 전" }
+		else if minutes > 0 { return "\(minutes)분 전" }
+		else { return "방금 전" }
 	}
 }

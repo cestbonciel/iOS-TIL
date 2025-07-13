@@ -14,12 +14,18 @@ final class PushNotificationManager: NSObject, ObservableObject {
 	@Published var notificationPermissionStatus: UNAuthorizationStatus = .notDetermined
 	@Published var lastNotification: [AnyHashable: Any]?
 	
+	// 자동 복구 관련 프로퍼티 (누락된 부분 추가)
+	@Published var isTokenHealthy: Bool = false
+	private var tokenRetryCount: Int = 0
+	private let maxRetryCount: Int = 3
+	private var tokenHealthCheckTimer: Timer?
+	
 	// 스마트 알림 설정
 	@Published var smartNotificationsEnabled: Bool = true
 	@Published var sleepModeStartHour: Int = 22 // 오후 10시
 	@Published var sleepModeEndHour: Int = 7   // 오전 7시
 	
-	// var anonKey = ""
+	// AppConfig 연동(private 파일)
 	private var supabaseURL: String {
 		return AppConfig.supabaseURL
 	}
@@ -34,10 +40,92 @@ final class PushNotificationManager: NSObject, ObservableObject {
 		UNUserNotificationCenter.current().delegate = self
 		checkNotificationPermission()
 		loadUserPreferences()
+		startTokenHealthMonitoring()
+	}
+	
+	private func startTokenHealthMonitoring() {
+		DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+			Task {
+				await self.performTokenHealthCheck()
+			}
+		}
+		
+		tokenHealthCheckTimer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { _ in
+			Task { @MainActor in
+				await self.performTokenHealthCheck()
+			}
+		}
+	}
+	
+	private func performTokenHealthCheck() async {
+		print("🔍 Performing token health check...")
+		
+		// 1. 권한 확인
+		let hasPermission = notificationPermissionStatus == .authorized
+		
+		// 2. 토큰 존재 확인
+		let hasToken = deviceToken != nil
+		
+		// 3. 등록 상태 확인
+		let isRegistered = UIApplication.shared.isRegisteredForRemoteNotifications
+		
+		let isHealthy = hasPermission && hasToken && isRegistered
+		
+		await MainActor.run {
+			self.isTokenHealthy = isHealthy
+		}
+		
+		print("📊 Token Health Status:")
+		print("   Permission: \(hasPermission)")
+		print("   Token: \(hasToken)")
+		print("   Registered: \(isRegistered)")
+		print("   Overall Health: \(isHealthy)")
+		
+		// 4. 자동 복구 시도
+		if !isHealthy && tokenRetryCount < maxRetryCount {
+			await attemptAutoRecovery()
+		}
+	}
+	private func attemptAutoRecovery() async {
+		tokenRetryCount += 1
+		print("🔧 Attempting auto recovery (attempt \(tokenRetryCount)/\(maxRetryCount))")
+		
+		// 권한이 없으면 복구 불가
+		guard notificationPermissionStatus == .authorized else {
+			print("❌ No permission - cannot auto recover")
+			return
+		}
+		
+		// 토큰 재등록 시도
+		await MainActor.run {
+			UIApplication.shared.unregisterForRemoteNotifications()
+			
+			DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+				UIApplication.shared.registerForRemoteNotifications()
+				print("🔄 Auto recovery: Re-registering for notifications")
+			}
+		}
+		
+		// 10초 후 재확인
+		DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+			Task {
+				await self.performTokenHealthCheck()
+			}
+		}
+	}
+	
+	// 사용자용 간단한 복구 함수 (누락된 부분 추가)
+	func refreshTokenIfNeeded() async {
+		if !isTokenHealthy {
+			print("🔄 User requested token refresh")
+			await attemptAutoRecovery()
+		} else {
+			print("✅ Token is already healthy")
+		}
 	}
 	
 	// MARK: - Permission Management
-		
+	
 	func requestNotificationPermission() async -> Bool {
 		do {
 			let granted = try await UNUserNotificationCenter.current().requestAuthorization(
@@ -135,16 +223,7 @@ final class PushNotificationManager: NSObject, ObservableObject {
 	
 	// MARK: - Smart Notification Engine
 	
-	func sendSmartCaffeineNotification(currentCaffeine: Int) async {
-		guard smartNotificationsEnabled && !isInSleepMode() else { return }
-		
-		let notification = generateCaffeineNotification(currentCaffeine: currentCaffeine)
-		await sendPushNotification(
-			title: notification.title,
-			body: notification.body,
-			customData: notification.customData
-		)
-	}
+	
 	
 	func sendSleepHealthNotification(currentCaffeine: Int, hour: Int) async {
 		guard smartNotificationsEnabled else { return }
@@ -286,17 +365,6 @@ final class PushNotificationManager: NSObject, ObservableObject {
 	
 	// MARK: - Utility Functions
 	
-	private func isInSleepMode() -> Bool {
-		let hour = Calendar.current.component(.hour, from: Date())
-		
-		if sleepModeStartHour > sleepModeEndHour {
-			// 예: 22시 ~ 7시 (다음날)
-			return hour >= sleepModeStartHour || hour <= sleepModeEndHour
-		} else {
-			// 예: 1시 ~ 6시 (같은 날)
-			return hour >= sleepModeStartHour && hour <= sleepModeEndHour
-		}
-	}
 	
 	private func loadUserPreferences() {
 		let userDefaults = UserDefaults.standard
@@ -331,12 +399,8 @@ final class PushNotificationManager: NSObject, ObservableObject {
 			return
 		}
 		
-		print("📤 Sending smart push via Supabase Edge Function...")
-		print("📝 Title: \(title)")
-		print("📝 Body: \(body)")
-		
 		// Supabase Edge Function URL 구성
-		let functionURL = "\(AppConfig.edgeFunctionURL)/functions/v1/send-push"
+		let functionURL = AppConfig.edgeFunctionURL
 		
 		guard let url = URL(string: functionURL) else {
 			print("❌ Invalid Supabase function URL")
@@ -373,14 +437,18 @@ final class PushNotificationManager: NSObject, ObservableObject {
 					}
 				} else {
 					if let errorData = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-						print("❌ Supabase Error: \(errorData)")
+						print("Supabase Error: \(errorData)")
 					}
 				}
 			}
 			
 		} catch {
-			print("❌ Network error: \(error)")
+			print("Network error: \(error)")
 		}
+	}
+	
+	deinit {
+		tokenHealthCheckTimer?.invalidate()
 	}
 	
 	// 백그라운드 알림 처리
@@ -419,6 +487,52 @@ final class PushNotificationManager: NSObject, ObservableObject {
 // MARK: - UNUserNotificationCenterDelegate
 
 extension PushNotificationManager: UNUserNotificationCenterDelegate {
+	private func isInSleepMode() -> Bool {
+		let hour = Calendar.current.component(.hour, from: Date())
+		
+		print("🕐 [DEBUG] 현재 시간: \(hour)시")
+		print("🕐 [DEBUG] Sleep 시작: \(sleepModeStartHour)시")
+		print("🕐 [DEBUG] Sleep 종료: \(sleepModeEndHour)시")
+		
+		if sleepModeStartHour > sleepModeEndHour {
+			// 예: 22시 ~ 7시 (다음날)
+			let inSleepMode = hour >= sleepModeStartHour || hour <= sleepModeEndHour
+			print("🕐 [DEBUG] Sleep Mode 상태: \(inSleepMode)")
+			return inSleepMode
+		} else {
+			// 예: 1시 ~ 6시 (같은 날)
+			let inSleepMode = hour >= sleepModeStartHour && hour <= sleepModeEndHour
+			print("🕐 [DEBUG] Sleep Mode 상태: \(inSleepMode)")
+			return inSleepMode
+		}
+	}
+	
+	func sendSmartCaffeineNotification(currentCaffeine: Int) async {
+		print("🔔 [PUSH] sendSmartCaffeineNotification 시작")
+		print("🔔 [PUSH] smartNotificationsEnabled: \(smartNotificationsEnabled)")
+		
+		guard smartNotificationsEnabled else {
+			print("🔔 [PUSH] 스마트 알림이 비활성화됨")
+			return
+		}
+		
+		// 🔧 Sleep mode 체크 완전 제거 (테스트용)
+		print("🔔 [PUSH] Sleep mode 체크 건너뜀 (테스트 모드)")
+		
+		let notification = generateCaffeineNotification(currentCaffeine: currentCaffeine)
+		
+		print("🔔 [PUSH] 생성된 알림:")
+		print("🔔 [PUSH] Title: \(notification.title)")
+		print("🔔 [PUSH] Body: \(notification.body)")
+		
+		await sendPushNotification(
+			title: notification.title,
+			body: notification.body,
+			customData: notification.customData
+		)
+		
+		print("🔔 [PUSH] sendSmartCaffeineNotification 완료")
+	}
 	
 	func userNotificationCenter(
 		_ center: UNUserNotificationCenter,
