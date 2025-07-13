@@ -1,10 +1,3 @@
-//
-//  CoffeePushWidgetApp.swift
-//  CoffeePushWidget
-//
-//  Created by Nat Kim on 6/23/25.
-//
-
 import SwiftUI
 import UIKit
 import UserNotifications
