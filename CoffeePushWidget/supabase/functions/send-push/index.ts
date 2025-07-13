@@ -5,6 +5,16 @@
 // Setup type definitions for built-in Supabase Runtime APIs
 import "jsr:@supabase/functions-js/edge-runtime.d.ts"
 
+// Deno 전역 객체 타입 선언 (린터 에러 해결용)
+declare global {
+  const Deno: {
+    env: {
+      get(key: string): string | undefined
+    }
+    serve(handler: (req: Request) => Promise<Response> | Response): void
+  }
+}
+
 console.log("☕ Coffee Push Notification Service Started!")
 
 interface PushRequest {
@@ -176,22 +186,96 @@ Deno.serve(async (req) => {
 
 // JWT 토큰 생성 함수 (APNs 인증용)
 async function generateAPNsJWT(keyId: string, teamId: string, privateKey: string): Promise<string> {
-  const header = {
-    alg: "ES256",
-    kid: keyId
-  }
+  try {
+    console.log("🔐 Generating JWT with real ES256 signature...")
+    
+    // JWT 헤더
+    const header = {
+      alg: "ES256",
+      kid: keyId
+    }
 
-  const payload = {
-    iss: teamId,
-    iat: Math.floor(Date.now() / 1000)
-  }
+    // JWT 페이로드  
+    const payload = {
+      iss: teamId,
+      iat: Math.floor(Date.now() / 1000)
+    }
 
-  // 실제로는 crypto API를 사용해서 ES256 서명을 해야 하지만
-  // 간단한 구현을 위해 라이브러리 사용
-  
-  // TODO: 실제 JWT 서명 구현 필요
-  // 지금은 테스트용으로 더미 토큰 반환
-  return "dummy-jwt-token-for-testing"
+    console.log(`📋 Header: ${JSON.stringify(header)}`)
+    console.log(`📋 Payload: ${JSON.stringify(payload)}`)
+
+    // Base64URL 인코딩 함수 (브라우저 내장 API 사용)
+    const base64UrlEncode = (obj: any): string => {
+      const jsonString = JSON.stringify(obj)
+      const encoded = btoa(jsonString)
+      return encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
+    }
+
+    const encodedHeader = base64UrlEncode(header)
+    const encodedPayload = base64UrlEncode(payload)
+    const signingInput = `${encodedHeader}.${encodedPayload}`
+
+    console.log(`🔗 Signing input: ${signingInput}`)
+
+    // P8 키 클리닝
+    const cleanKey = privateKey
+      .replace(/-----BEGIN PRIVATE KEY-----/, '')
+      .replace(/-----END PRIVATE KEY-----/, '')
+      .replace(/\s/g, '')
+
+    console.log(`🔑 Cleaned key length: ${cleanKey.length}`)
+
+    // DER 형식으로 디코딩
+    const binaryKey = new Uint8Array(
+      atob(cleanKey).split('').map(char => char.charCodeAt(0))
+    )
+    
+    console.log(`🔢 Binary key length: ${binaryKey.length}`)
+
+    // ECDSA P-256 키 임포트
+    const cryptoKey = await crypto.subtle.importKey(
+      'pkcs8',
+      binaryKey,
+      {
+        name: 'ECDSA',
+        namedCurve: 'P-256'
+      },
+      false,
+      ['sign']
+    )
+
+    console.log("✅ Key imported successfully")
+
+    // 서명 생성
+    const signature = await crypto.subtle.sign(
+      {
+        name: 'ECDSA',
+        hash: 'SHA-256'
+      },
+      cryptoKey,
+      new TextEncoder().encode(signingInput)
+    )
+
+    console.log(`✍️ Signature generated: ${signature.byteLength} bytes`)
+
+    // 서명을 Base64URL로 인코딩
+    const signatureArray = new Uint8Array(signature)
+    const signatureBase64 = btoa(String.fromCharCode(...signatureArray))
+    const signatureBase64Url = signatureBase64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
+
+    const finalJWT = `${signingInput}.${signatureBase64Url}`
+    console.log(`🎫 Final JWT length: ${finalJWT.length}`)
+    
+    return finalJWT
+    
+  } catch (error) {
+    console.error('🚨 JWT generation error:', error)
+    console.error('Stack trace:', error.stack)
+    
+    // 실패 시 더미 토큰 (개발용)
+    console.log("⚠️ Falling back to dummy token")
+    return "dummy-jwt-token-for-testing"
+  }
 }
 
 /* 사용 예시:
