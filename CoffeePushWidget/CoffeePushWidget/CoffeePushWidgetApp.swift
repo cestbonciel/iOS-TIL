@@ -1,10 +1,3 @@
-//
-//  CoffeePushWidgetApp.swift
-//  CoffeePushWidget
-//
-//  Created by Nat Kim on 6/23/25.
-//
-
 import SwiftUI
 import UIKit
 import UserNotifications
@@ -13,45 +6,46 @@ import WidgetKit
 @main
 struct CoffeePushWidgetApp: App {
 	@UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+	@StateObject private var pushManager = PushNotificationManager()
 	
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
+				.environmentObject(pushManager)
+				.onAppear {
+					// AppDelegate에 PushManager 주입
+					appDelegate.pushManager = pushManager
+				}
 		}
 	}
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+	var pushManager: PushNotificationManager?
+	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+		print("🚀 App launched with CoffeePushWidget")
 		
-		// Push Notification 권한 요청
+		// UNUserNotificationCenter delegate는 PushManager가 처리하지만
+		// AppDelegate도 백업으로 설정 (시스템 호환성)
 		UNUserNotificationCenter.current().delegate = self
-		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-			if granted {
-				print("Push notification permission granted")
-				DispatchQueue.main.async {
-					UIApplication.shared.registerForRemoteNotifications()
-				}
-			} else {
-				print("Push notification permission denied")
-			}
-		}
+		
+		// 권한 요청은 이제 PushManager에서 처리
+		// (앱 시작 시 자동 요청 대신 사용자 액션으로 변경 예정)
 		
 		return true
 	}
 	
-	// 푸시 토큰 받기
+	// 푸시 토큰 받기 → PushManager로 위임
 	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-		let tokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
-		print("Device Token: \(tokenString)")
-		
-		// 서버로 토큰 전송
-		sendTokenToServer(tokenString)
+		print("📱 AppDelegate received device token, delegating to PushManager")
+		pushManager?.setDeviceToken(deviceToken)
 	}
 	
-	// 푸시 토큰 등록 실패
+	// 푸시 토큰 등록 실패 → PushManager로 위임
 	func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-		print("Failed to register for remote notifications: \(error)")
+		print("📱 AppDelegate received token error, delegating to PushManager")
+		pushManager?.setDeviceTokenError(error)
 	}
 	
 	// 앱이 포그라운드에 있을 때 푸시 알림 받기
@@ -65,41 +59,19 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 		completionHandler([.banner, .sound])
 	}
 	
-	// 백그라운드에서 푸시 알림 받기
+	// 백그라운드에서 푸시 알림 받기 → PushManager로 위임
 	func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-		print("Received background push notification")
+		print("📥 AppDelegate received background notification, delegating to PushManager")
 		print("Payload: \(userInfo)")
 		
 		// 위젯 업데이트
 		WidgetCenter.shared.reloadAllTimelines()
 		
+		// PushManager에게 처리 위임
+		pushManager?.handleBackgroundNotification(userInfo)
+		
 		completionHandler(.newData)
 	}
 	
-	private func sendTokenToServer(_ token: String) {
-		guard let url = URL(string: "http://localhost:3000/register-token") else {
-			print("Invalid server URL")
-			return
-		}
-		
-		var request = URLRequest(url: url)
-		request.httpMethod = "POST"
-		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-		
-		let payload = ["token": token, "type": "general"]
-		
-		do {
-			request.httpBody = try JSONSerialization.data(withJSONObject: payload)
-			
-			URLSession.shared.dataTask(with: request) { data, response, error in
-				if let error = error {
-					print("Token send error: \(error)")
-				} else {
-					print("Token sent to server successfully")
-				}
-			}.resume()
-		} catch {
-			print("Token encoding error: \(error)")
-		}
-	}
+	// sendTokenToServer 로직은 PushNotificationManager로 이동됨
 }
