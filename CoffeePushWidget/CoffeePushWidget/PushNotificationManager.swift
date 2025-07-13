@@ -18,7 +18,17 @@ final class PushNotificationManager: NSObject, ObservableObject {
 	@Published var smartNotificationsEnabled: Bool = true
 	@Published var sleepModeStartHour: Int = 22 // 오후 10시
 	@Published var sleepModeEndHour: Int = 7   // 오전 7시
-	var anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdtdnp6bW9za2xheWVsdGhwdW1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDc4NDksImV4cCI6MjA2NjI4Mzg0OX0.iuvq-1gaXNmEQU08QbC28QKmzWkbZST5pK4tiS3dHqw"
+	
+	// var anonKey = ""
+	private var supabaseURL: String {
+		return AppConfig.supabaseURL
+	}
+	
+	private var anonKey: String {
+		return AppConfig.supabaseAnonKey
+	}
+	
+	
 	override init() {
 		super.init()
 		UNUserNotificationCenter.current().delegate = self
@@ -326,8 +336,7 @@ final class PushNotificationManager: NSObject, ObservableObject {
 		print("📝 Body: \(body)")
 		
 		// Supabase Edge Function URL 구성
-		let supabaseURL = "https://gmvzzmosklayelthpumc.supabase.co"
-		let functionURL = "\(supabaseURL)/functions/v1/send-push"
+		let functionURL = "\(AppConfig.edgeFunctionURL)/functions/v1/send-push"
 		
 		guard let url = URL(string: functionURL) else {
 			print("❌ Invalid Supabase function URL")

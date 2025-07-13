@@ -143,3 +143,11 @@ supabase/config.toml
 Network Trash Folder
 Temporary Items
 .apdisk
+AppConfig-private.swift
+CoffeePushWidget/Security/AppConfig-private.swift
+
+# 🔐 SECURITY: AppConfig files (정확한 경로)
+AppConfig-private.swift
+CoffeePushWidget/Security/AppConfig-private.swift
+CoffeePushWidget/AppConfig-private.swift
+
