@@ -83,6 +83,81 @@ struct ContentView: View {
 				Spacer()
 				
 				// 스마트 알림 버튼
+				// 스마트 알림 버튼
+				VStack(spacing: 12) {
+					// 🔧 디버그: 토큰 상태 확인
+					Button {
+						pushManager.checkTokenStatus()
+					} label: {
+						HStack {
+							Image(systemName: "info.circle")
+							Text("토큰 상태 확인")
+						}
+						.frame(maxWidth: .infinity)
+						.padding()
+						.background(Color.gray)
+						.foregroundColor(.white)
+						.cornerRadius(10)
+					}
+					
+					// 🔧 디버그: 토큰 강제 새로고침
+					Button {
+						Task {
+							await pushManager.forceRefreshDeviceToken()
+						}
+					} label: {
+						HStack {
+							Image(systemName: "arrow.clockwise")
+							Text("토큰 새로고침")
+						}
+						.frame(maxWidth: .infinity)
+						.padding()
+						.background(Color.red)
+						.foregroundColor(.white)
+						.cornerRadius(10)
+					}
+					
+					Button {
+						Task {
+							// 📊 디버그: 현재 상태 출력
+							print("=== DEBUG INFO ===")
+							print("📱 Device Token: \(pushManager.deviceToken ?? "nil")")
+							print("🔔 Permission: \(pushManager.notificationPermissionStatus)")
+							print("☕ Current Caffeine: \(dataManager.todayTotalCaffeine)")
+							print("==================")
+							
+							await sendSmartCaffeineAlert()
+						}
+					} label: {
+						HStack {
+							Image(systemName: "brain.head.profile")
+							Text("스마트 카페인 알림")
+						}
+						.frame(maxWidth: .infinity)
+						.padding()
+						.background(Color.blue)
+						.foregroundColor(.white)
+						.cornerRadius(10)
+					}
+					
+					Button {
+						Task {
+							await sendSleepHealthAlert()
+						}
+					} label: {
+						HStack {
+							Image(systemName: "moon.stars")
+							Text("수면 건강 알림")
+						}
+						.frame(maxWidth: .infinity)
+						.padding()
+						.background(Color.purple)
+						.foregroundColor(.white)
+						.cornerRadius(10)
+					}
+					.disabled(pushManager.deviceToken == nil)
+				}
+				/*
 				VStack(spacing: 12) {
 					Button {
 						Task {
@@ -117,6 +192,7 @@ struct ContentView: View {
 					}
 					.disabled(pushManager.deviceToken == nil)
 				}
+				*/
 				// 푸시 알림 테스트 버튼
 				/*	VStack(spacing: 12) {
 				 Button {
@@ -308,7 +384,8 @@ struct ContentView: View {
 		dataManager.addEntry(entry)
 		
 		Task {
-			await checkAndSendSmartNotification()
+			//await checkAndSendSmartNotification()
+			await triggerSmartAutoNotification()
 		}
 		
 		// 현재 사용 가능한 위젯 업데이트 방법
@@ -317,6 +394,36 @@ struct ContentView: View {
 		showingAddCoffee = false
 		resetForm()
 	}
+	
+	// 🧠 스마트 자동 알림 트리거
+	private func triggerSmartAutoNotification() async {
+		let currentCaffeine = dataManager.todayTotalCaffeine
+		let hour = Calendar.current.component(.hour, from: Date())
+		
+		// 임계점 기반 자동 알림
+		switch (currentCaffeine, hour) {
+		
+		// 🚨 즉시 경고가 필요한 상황
+		case (400..., _):
+			await pushManager.sendSmartCaffeineNotification(currentCaffeine: currentCaffeine)
+			
+		case (320..., 16...23), (320..., 0...6):
+			await pushManager.sendSleepHealthNotification(currentCaffeine: currentCaffeine, hour: hour)
+			
+		// 📊 정보 제공 차원에서
+		case (200..., 18...23):
+			await pushManager.sendSleepHealthNotification(currentCaffeine: currentCaffeine, hour: hour)
+			
+		case (100..., 13...15):
+			// 오후 적정량 도달 시 축하 메시지
+			await pushManager.sendSmartCaffeineNotification(currentCaffeine: currentCaffeine)
+			
+		default:
+			// 특별한 알림 없음 (조용히)
+			print("📊 Current caffeine level: \(currentCaffeine)mg - No notification needed")
+		}
+	}
+
 	
 	private func resetForm() {
 		newCoffeeName = ""

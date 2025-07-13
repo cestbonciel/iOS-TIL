@@ -57,21 +57,46 @@ final class PushNotificationManager: NSObject, ObservableObject {
 		}
 	}
 	
+	func forceRefreshDeviceToken() async {
+		print("🔄 Force refreshing device token...")
+		
+		await MainActor.run {
+			// 1. 기존 등록 해제
+			UIApplication.shared.unregisterForRemoteNotifications()
+			print("📱 Unregistered for remote notifications")
+			
+			// 2. 잠시 대기 후 재등록
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+				UIApplication.shared.registerForRemoteNotifications()
+				print("📱 Re-registering for remote notifications...")
+			}
+		}
+	}
+	
 	// MARK: - Device Token Management
 	
 	@MainActor
 	private func registerForRemoteNotifications() async {
-		guard UIApplication.shared.isRegisteredForRemoteNotifications == false else {
-			print("📱 Already registered for remote notifications")
-			return
-		}
-		
-		UIApplication.shared.registerForRemoteNotifications()
+//		guard UIApplication.shared.isRegisteredForRemoteNotifications == false else {
+//			print("📱 Already registered for remote notifications")
+//			return
+//		}
+//		
+//		UIApplication.shared.registerForRemoteNotifications()
+//		print("📱 Registering for remote notifications...")
 		print("📱 Registering for remote notifications...")
+		UIApplication.shared.registerForRemoteNotifications()
+		
+		// 등록 상태와 관계없이 항상 시도
+		print("📱 Registration attempt completed")
 	}
 	
 	func setDeviceToken(_ tokenData: Data) {
 		let token = tokenData.map { String(format: "%02.2hhx", $0) }.joined()
+		
+		print("🎯 Raw token data length: \(tokenData.count)")
+		print("🔑 Generated token length: \(token.count)")
+
 		
 		Task { @MainActor in
 			self.deviceToken = token
@@ -87,6 +112,15 @@ final class PushNotificationManager: NSObject, ObservableObject {
 	
 	func setDeviceTokenError(_ error: Error) {
 		print("❌ Failed to get device token: \(error)")
+	}
+	
+	// 토큰 상태 확인 메서드 추가
+	func checkTokenStatus() {
+		print("=== TOKEN STATUS ===")
+		print("📱 Device Token: \(deviceToken ?? "nil")")
+		print("🔔 Permission: \(notificationPermissionStatus)")
+		print("📋 Is Registered: \(UIApplication.shared.isRegisteredForRemoteNotifications)")
+		print("==================")
 	}
 	
 	// MARK: - Smart Notification Engine
@@ -114,64 +148,128 @@ final class PushNotificationManager: NSObject, ObservableObject {
 	}
 	
 	private func generateCaffeineNotification(currentCaffeine: Int) -> SmartNotification {
-		switch currentCaffeine {
-		case 400...:
+		let hour = Calendar.current.component(.hour, from: Date())
+		
+		// 시간대별 + 카페인 수준별 로직
+		switch (currentCaffeine, hour) {
+			
+			// 🚨 위험 수준 (400mg 이상) - 시간 관계없이 경고
+		case (400..., _):
 			return SmartNotification(
-				title: "일일 카페인 한도 초과",
-				body: "권장량 400mg를 초과했어요! 건강을 위해 물을 드세요",
-				customData: ["type": "caffeine_exceeded", "level": "critical"]
+				title: "🚨 카페인 과다 섭취",
+				body: "권장량 400mg를 초과했어요! 즉시 카페인 섭취를 중단하고 물을 드세요.",
+				customData: ["type": "critical_warning", "level": "dangerous"]
 			)
-		case 320..<400:
+			
+			// 🔥 경고 수준 (320-399mg)
+		case (320..<400, 18...23), (320..<400, 0...6):
 			return SmartNotification(
-				title: "카페인 주의",
+				title: "🌙 늦은 시간 카페인 경고",
+				body: "이미 \(currentCaffeine)mg 섭취했고 늦은 시간이에요. 수면을 위해 더 이상 드시지 마세요.",
+				customData: ["type": "evening_warning", "level": "high"]
+			)
+		case (320..<400, _):
+			return SmartNotification(
+				title: "⚠️ 카페인 주의",
 				body: "오늘 \(currentCaffeine)mg 섭취했어요. 권장량까지 \(400 - currentCaffeine)mg 남았습니다.",
-				customData: ["type": "caffeine_warning", "level": "high"]
+				customData: ["type": "moderate_warning", "level": "high"]
 			)
-		case 240..<320:
+			
+			// 😴 저녁/밤 시간 (18시 이후)
+		case (200..<320, 18...23), (200..<320, 0...6):
 			return SmartNotification(
-				title: "카페인 체크",
-				body: "오늘 \(currentCaffeine)mg 섭취 중이에요. 적당한 수준을 유지하고 있어요!",
-				customData: ["type": "caffeine_check", "level": "medium"]
+				title: "🌜 수면을 위한 제안",
+				body: "저녁 시간이네요. 좋은 잠을 위해 카페인보다는 허브차나 물을 추천해요.",
+				customData: ["type": "evening_suggestion", "level": "medium"]
 			)
-		case 120..<240:
+			
+			// ☕ 적정 수준 (100-199mg)
+		case (100..<200, 7...9):
 			return SmartNotification(
-				title: "커피 타임",
-				body: "현재 \(currentCaffeine)mg 섭취했어요. 오후 집중력을 위해 커피 한 잔 어떠세요?",
-				customData: ["type": "caffeine_suggestion", "level": "low"]
+				title: "🌅 좋은 아침!",
+				body: "현재 \(currentCaffeine)mg 섭취 중이에요. 아침 집중력을 위해 커피 한 잔 더 어떠세요?",
+				customData: ["type": "morning_boost", "level": "low"]
 			)
+		case (100..<200, 13...15):
+			return SmartNotification(
+				title: "☕ 오후 에너지 충전",
+				body: "오후 나른함을 이길 시간! 현재 \(currentCaffeine)mg로 적당한 수준이에요.",
+				customData: ["type": "afternoon_boost", "level": "low"]
+			)
+		case (100..<200, _):
+			return SmartNotification(
+				title: "✅ 적정 카페인 수준",
+				body: "현재 \(currentCaffeine)mg로 좋은 수준이에요! 하루 종일 활기차게 보내세요.",
+				customData: ["type": "optimal_level", "level": "low"]
+			)
+			
+			// 🌅 아침 시간 + 카페인 없음/적음 (0-99mg)
+		case (0..<100, 6...9):
+			return SmartNotification(
+				title: "🌅 모닝 커피 타임",
+				body: "새로운 하루가 시작됐어요! 모닝 커피로 활기찬 하루를 시작해보세요.",
+				customData: ["type": "morning_start", "level": "none"]
+			)
+			
+			// 🌃 밤 시간 + 카페인 적음
+		case (0..<100, 20...23), (0..<100, 0...6):
+			return SmartNotification(
+				title: "🌙 좋은 밤!",
+				body: "오늘 카페인 섭취가 적어서 좋은 잠을 잘 수 있을 거예요. 편안한 밤 되세요.",
+				customData: ["type": "good_night", "level": "none"]
+			)
+			
+			// 🍃 기본 (점심 시간 등)
 		default:
 			return SmartNotification(
-				title: "좋은 아침!",
-				body: "새로운 하루가 시작됐어요! 모닝 커피로 활기찬 하루를 시작해보세요",
-				customData: ["type": "morning_boost", "level": "none"]
+				title: "☕ 커피 브레이크",
+				body: "현재 \(currentCaffeine)mg 섭취했어요. 필요하시면 적당한 커피 한 잔 어떠세요?",
+				customData: ["type": "general_suggestion", "level": "none"]
 			)
 		}
 	}
 	
 	private func generateSleepHealthNotification(currentCaffeine: Int, hour: Int) -> SmartNotification {
-		if hour >= 18 && currentCaffeine >= 200 {
+		// 🌙 실제 수면 건강 기반 로직
+		switch (currentCaffeine, hour) {
+			
+			// 밤 시간 + 고카페인
+		case (300..., 20...23), (300..., 0...6):
 			return SmartNotification(
-				title: "수면 건강 알림",
-				body: "저녁 시간이에요. 좋은 잠을 위해 카페인 대신 물이나 허브차는 어떠세요?",
-				customData: ["type": "sleep_health", "time": "evening"]
+				title: "🚨 수면 위험 경고",
+				body: "밤 시간에 \(currentCaffeine)mg는 매우 위험해요! 불면증 위험이 높습니다.",
+				customData: ["type": "sleep_danger", "time": "night"]
 			)
-		} else if hour >= 14 && currentCaffeine >= 300 {
+			
+			// 저녁 시간 + 중간 카페인
+		case (200..<300, 18...20):
 			return SmartNotification(
-				title: "수면을 위한 제안",
-				body: "이미 충분한 카페인을 섭취했어요. 밤에 잘 자기 위해 이제 물을 드세요!",
-				customData: ["type": "sleep_suggestion", "time": "afternoon"]
+				title: "🌅 수면 준비 시간",
+				body: "저녁이에요. 좋은 잠을 위해 이제부터는 물이나 허브차를 드세요.",
+				customData: ["type": "sleep_prep", "time": "evening"]
 			)
-		} else if hour >= 22 || hour <= 6 {
+			
+			// 오후 늦은 시간 + 고카페인
+		case (250..., 15...17):
 			return SmartNotification(
-				title: "늦은 시간입니다",
-				body: "지금은 휴식 시간이에요. 카페인보다는 따뜻한 물이나 허브차를 추천해요.",
-				customData: ["type": "sleep_time", "time": "night"]
+				title: "😴 수면을 위한 주의",
+				body: "오후 늦은 시간에 \(currentCaffeine)mg는 밤잠에 영향을 줄 수 있어요.",
+				customData: ["type": "afternoon_warning", "time": "late_afternoon"]
 			)
-		} else {
+			
+			// 적정 수준
+		case (0..<200, _):
 			return SmartNotification(
-				title: "수면 건강 체크",
-				body: "현재 카페인 수준이 좋아요! 저녁까지 이 상태를 유지하시면 좋은 잠을 잘 수 있을 거예요.",
-				customData: ["type": "sleep_ok", "time": "day"]
+				title: "✅ 수면 건강 양호",
+				body: "현재 카페인 수준(\(currentCaffeine)mg)이 좋아요! 좋은 잠을 잘 수 있을 거예요.",
+				customData: ["type": "sleep_healthy", "time": "any"]
+			)
+			
+		default:
+			return SmartNotification(
+				title: "🛌 수면 건강 체크",
+				body: "현재 \(currentCaffeine)mg 섭취했어요. 저녁까지 적당히 조절하시면 좋겠어요.",
+				customData: ["type": "sleep_moderate", "time": "day"]
 			)
 		}
 	}

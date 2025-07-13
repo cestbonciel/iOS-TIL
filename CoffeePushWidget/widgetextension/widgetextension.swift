@@ -27,12 +27,34 @@ struct CoffeeTimelineProvider: TimelineProvider {
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
 		let currentEntry = loadCurrentData()
 		
-		let nextUpdate = Calendar.current.date(byAdding: .hour, value: 1, to: Date()) ?? Date()
-		
+		//let nextUpdate = Calendar.current.date(byAdding: .hour, value: 1, to: Date()) ?? Date()
+		let nextUpdate = calculateOptimalUpdateTime()
 		let timeline = Timeline(entries: [currentEntry], policy: .after(nextUpdate))
 		
 		completion(timeline)
     }
+	
+	private func calculateOptimalUpdateTime() -> Date {
+		let calendar = Calendar.current
+		let now = Date()
+		let hour = calendar.component(.hour, from: now)
+		
+		// 사용 패턴에 따른 최적화
+		switch hour {
+		case 22...23, 0...6:
+			// 🌙 수면 시간: 4시간마다 업데이트
+			return calendar.date(byAdding: .hour, value: 4, to: now) ?? Date()
+		case 7...9:
+			// ☀️ 아침 시간: 1시간마다 (커피 타임)
+			return calendar.date(byAdding: .hour, value: 1, to: now) ?? Date()
+		case 13...15:
+			// ☕ 오후 커피 시간: 1시간마다
+			return calendar.date(byAdding: .hour, value: 1, to: now) ?? Date()
+		default:
+			// 🕐 일반 시간: 2시간마다
+			return calendar.date(byAdding: .hour, value: 2, to: now) ?? Date()
+		}
+	}
 	
 	private func loadCurrentData() -> CoffeeEntry {
 		guard let userDefaults = UserDefaults(suiteName: "group.com.seohyunKim.iOS.CoffeePushWidget2025"),
@@ -79,14 +101,17 @@ struct widgetextensionEntryView : View {
 	var body: some View {
 		switch family {
 		case .systemSmall:
-			SmallWidgetView(entry: entry)
+			SmartWidgetView(entry: entry)
 		case .systemMedium:
 			MediumWidgetView(entry: entry)
 		default:
-			SmallWidgetView(entry: entry)
+			SmartWidgetView(entry: entry)
 		}
 	}
 }
+
+
+
 
 struct SmallWidgetView: View {
 	let entry: CoffeeEntry
