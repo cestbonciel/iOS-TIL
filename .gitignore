@@ -140,5 +140,58 @@ Server/node_modules/
 Server/tokens.json
 Server/npm-debug.log*
 
-
-# End of https://www.toptal.com/developers/gitignore/api/swift,firebase,xcode
+# After new code Injection tools there's a generated folder /iOSInjectionProject
+# https://github.com/johnno1962/injectionforxcode
+iOSInjectionProject/
+# 🔐 SECURITY: API Keys and Secrets
+Config.swift
+APIKeys.swift
+Secrets.swift
+Config.plist
+GoogleService-Info.plist
+*-Info.plist
+# 🔐 SECURITY: Environment files
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+# 🔐 SECURITY: Certificate files
+*.p12
+*.p8
+*.cer
+.mobileprovision
+# 🔐 SECURITY: Supabase local config
+supabase/.temp/
+supabase/.env
+supabase/config.toml
+# 🔐 SECURITY: Any file containing API keys
+**/APIConfiguration.
+/SupabaseConfig.*
+/PushConfig.*
+# macOS
+.DSStore
+.AppleDouble
+.LSOverride
+# Thumbnails
+.*
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+AppConfig-private.swift
+CoffeePushWidget/Security/AppConfig-private.swift
+# 🔐 SECURITY: AppConfig files (정확한 경로)
+AppConfig-private.swift
+CoffeePushWidget/Security/AppConfig-private.swift
+CoffeePushWidget/AppConfig-private.swift
