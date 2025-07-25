@@ -27,12 +27,34 @@ struct CoffeeTimelineProvider: TimelineProvider {
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
 		let currentEntry = loadCurrentData()
 		
-		let nextUpdate = Calendar.current.date(byAdding: .hour, value: 1, to: Date()) ?? Date()
-		
+		//let nextUpdate = Calendar.current.date(byAdding: .hour, value: 1, to: Date()) ?? Date()
+		let nextUpdate = calculateOptimalUpdateTime()
 		let timeline = Timeline(entries: [currentEntry], policy: .after(nextUpdate))
 		
 		completion(timeline)
     }
+	
+	private func calculateOptimalUpdateTime() -> Date {
+		let calendar = Calendar.current
+		let now = Date()
+		let hour = calendar.component(.hour, from: now)
+		
+		// 사용 패턴에 따른 최적화
+		switch hour {
+		case 22...23, 0...6:
+			// 🌙 수면 시간: 4시간마다 업데이트
+			return calendar.date(byAdding: .hour, value: 4, to: now) ?? Date()
+		case 7...9:
+			// ☀️ 아침 시간: 1시간마다 (커피 타임)
+			return calendar.date(byAdding: .hour, value: 1, to: now) ?? Date()
+		case 13...15:
+			// ☕ 오후 커피 시간: 1시간마다
+			return calendar.date(byAdding: .hour, value: 1, to: now) ?? Date()
+		default:
+			// 🕐 일반 시간: 2시간마다
+			return calendar.date(byAdding: .hour, value: 2, to: now) ?? Date()
+		}
+	}
 	
 	private func loadCurrentData() -> CoffeeEntry {
 		guard let userDefaults = UserDefaults(suiteName: "group.com.seohyunKim.iOS.CoffeePushWidget2025"),
@@ -79,14 +101,17 @@ struct widgetextensionEntryView : View {
 	var body: some View {
 		switch family {
 		case .systemSmall:
-			SmallWidgetView(entry: entry)
+			SmartWidgetView(entry: entry)
 		case .systemMedium:
 			MediumWidgetView(entry: entry)
 		default:
-			SmallWidgetView(entry: entry)
+			SmartWidgetView(entry: entry)
 		}
 	}
 }
+
+
+
 
 struct SmallWidgetView: View {
 	let entry: CoffeeEntry
@@ -148,59 +173,6 @@ struct SmallWidgetView: View {
 	}
 }
 
-struct MediumWidgetView: View {
-	let entry: CoffeeEntry
-	
-	var body: some View {
-		HStack(spacing: 16) {
-			// 왼쪽: 카페인 총량
-			VStack(spacing: 4) {
-				Text("오늘 카페인")
-					.font(.caption)
-					.foregroundColor(.secondary)
-				Text("\(entry.totalCaffeine)")
-					.font(.largeTitle)
-					.fontWeight(.bold)
-					.foregroundColor(.primary)
-				Text("mg")
-					.font(.caption)
-					.foregroundColor(.secondary)
-			}
-			.frame(maxWidth: .infinity)
-			
-			Divider()
-			
-			// 오른쪽: 최근 기록
-			VStack(alignment: .leading, spacing: 4) {
-				Text("최근 기록")
-					.font(.caption)
-					.foregroundColor(.secondary)
-					.frame(maxWidth: .infinity, alignment: .leading)
-				
-				if entry.recentEntries.isEmpty {
-					Text("아직 기록이 없습니다")
-						.font(.caption2)
-						.foregroundColor(.secondary)
-						.frame(maxWidth: .infinity, alignment: .center)
-				} else {
-					ForEach(Array(entry.recentEntries.enumerated()), id: \.offset) { index, record in
-						HStack {
-							Text(record.name)
-								.font(.caption2)
-								.lineLimit(1)
-							Spacer()
-							Text("\(record.caffeine)mg")
-								.font(.caption2)
-								.foregroundColor(.secondary)
-						}
-					}
-				}
-			}
-			.frame(maxWidth: .infinity)
-		}
-		.padding()
-	}
-}
 
 
 struct widgetextension: Widget {
