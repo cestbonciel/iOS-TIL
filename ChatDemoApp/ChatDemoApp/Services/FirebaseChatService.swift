@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-final class FirebaseChatService {
+class FirebaseChatService {
 	private let db = Firestore.firestore()
 	private let room = "general"
 	

@@ -8,12 +8,12 @@
 import Foundation
 
 @MainActor
-final class ChatViewModel: ObservableObject {
+class ChatViewModel: ObservableObject {
 	@Published var messages: [ChatMessage] = []
 	@Published var input: String = ""
 
 	private let service: FirebaseChatService
-	private let userId: String = UUID().uuidString
+	let userId: String = UUID().uuidString
 	private let userName: String = "iOS-\(Int.random(in: 100...999))"
 
 	init(service: FirebaseChatService) {

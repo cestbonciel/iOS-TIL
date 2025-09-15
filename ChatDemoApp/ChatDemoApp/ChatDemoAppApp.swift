@@ -21,9 +21,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct ChatDemoAppApp: App {
 	@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+	var body: some Scene {
+		WindowGroup {
+			ChatView(viewModel: ChatViewModel(service: FirebaseChatService()))
+		}
+	}
 }
